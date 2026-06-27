@@ -9,9 +9,14 @@
     "dark": "#2A52B8"
   },
   "favicon": "/favicon.svg",
+  "seo": {
+    "metatags": {
+      "canonical": "https://docs.sunnymeteo.com"
+    }
+  },
   "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "light": "/logo/light_sunny.svg",
+    "dark": "/logo/dark_sunny.svg"
   },
   "navbar": {
     "links": [

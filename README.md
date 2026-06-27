@@ -1,5 +1,7 @@
 # SunnyMeteo Developer Docs (Mintlify)
 
+生产地址：**https://docs.sunnymeteo.com**
+
 SunnyMeteo 开发者文档，按 **引言 → 通用技术说明 → 产品 → 平台 → 数据字典** 组织。
 
 ## 目录结构
