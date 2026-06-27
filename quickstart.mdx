@@ -1,47 +1,35 @@
 ---
-title: "Quickstart"
-description: "Begin with a guide on the fastest path to a successful outcome"
+title: "Quickstart / 快速开始"
+description: "Get your first SunnyMeteo API request working in minutes"
 ---
 
-Describe how someone begins using your product. What is the first thing they need to do? Are there any prerequisites?
+本页帮助你在几分钟内完成第一次 API 调用。
 
-A quickstart should take someone from zero to using your product. They'll get a quick win and a sense of what they can accomplish.
+## Prerequisites / 前置条件
 
-## Prerequisites
-
-Before you begin, you must have:
-
-- Requirement one (for example, Node.js 18+, a free account, an API key)
-- Requirement two (for example, a compatible device, a compatible browser, a compatible operating system)
+- SunnyMeteo API Key（`X-API-Key`）
+- 可访问 `https://api.sunnymeteo.com` 的网络环境
+- 任意 HTTP 客户端（curl、Postman 或 SDK）
 
 ## Get started
 
 <Steps>
-  <Step title="Install">
-    Describe how to install your product or sign up.
+  <Step title="Obtain an API key">
+    联系 SunnyMeteo 获取 API Key，或在控制台创建密钥（即将开放）。
+  </Step>
+  <Step title="Make your first request">
+    使用城市 ID 或经纬度请求实况天气（示例路径，以 API Explorer 为准）：
 
     ```bash
-    npm install your-package
+    curl -s "https://api.sunnymeteo.com/v1/weather/condition?cityId=101010100" \
+      -H "X-API-Key: YOUR_API_KEY"
     ```
   </Step>
-  <Step title="Configure">
-    Describe any setup or configuration needed before first use.
-
-    ```bash
-    your-cli init
-    ```
-  </Step>
-  <Step title="Run it">
-    Show the first thing a user does to see it working.
-
-    ```bash
-    your-cli start
-    ```
+  <Step title="Explore products">
+    在左侧导航 **Products / 产品** 中按业务场景查阅数据说明与字段定义。
   </Step>
 </Steps>
 
 <Tip>
-  Give people a way to get help. This could be a link to a support page, a chat with a customer support agent, or a forum for your product.
-
-  Example: Need help? Reach out to us at [support@yourcompany.com](mailto:support@yourcompany.com).
+  需要联调？使用 [API Explorer](https://api.sunnymeteo.com/docs) 查看完整路径与参数。
 </Tip>

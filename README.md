@@ -1,55 +1,53 @@
-# Mintlify Starter Kit
+# SunnyMeteo Developer Docs (Mintlify)
 
-Use the starter kit to get your docs deployed and ready to customize.
+SunnyMeteo 开发者文档，按 **引言 → 通用技术说明 → 产品 → 平台 → 数据字典** 组织。
 
-Click the green **Use this template** button at the top of this repo to copy the Mintlify starter kit. The starter kit contains examples with
+## 目录结构
 
-- Guide pages
-- Navigation
-- Customizations
-- API reference pages
-- Use of popular components
+```
+docs/
+├── docs.json                 # Mintlify 配置与导航
+├── index.mdx                 # Introduction / 引言
+├── quickstart.mdx            # 快速开始
+├── integrations/             # Integrations / 通用技术说明
+│   ├── api.mdx
+│   ├── sdk.mdx
+│   ├── mcp.mdx
+│   └── map.mdx
+├── products/                 # Products / 产品
+│   ├── current-weather.mdx
+│   ├── hourly-forecast.mdx
+│   ├── daily-forecast.mdx
+│   ├── historical-weather.mdx
+│   ├── disaster-alerts.mdx
+│   ├── air-quality.mdx
+│   ├── astronomy.mdx
+│   ├── ocean.mdx
+│   ├── earthquake.mdx
+│   ├── typhoon.mdx
+│   └── climate.mdx
+├── platform/                 # Platform / 平台 (Coming Soon)
+│   ├── map-platform.mdx
+│   ├── solar-meteo-saas.mdx
+│   └── wind-meteo-saas.mdx
+└── reference/                # Reference / 数据字典
+    ├── weather-elements.mdx
+    ├── units.mdx
+    ├── coordinate-systems.mdx
+    ├── location-codes.mdx
+    └── status-codes.mdx
+```
 
-**[Follow the full quickstart guide](https://starter.mintlify.com/quickstart)**
-
-## AI-assisted writing
-
-Set up your AI coding tool to work with Mintlify:
+## 本地预览
 
 ```bash
-npx skills add https://mintlify.com/docs
-```
-
-This command installs Mintlify's documentation skill for your configured AI tools like Claude Code, Cursor, Windsurf, and others. The skill includes component reference, writing standards, and workflow guidance.
-
-See the [AI tools guides](/ai-tools) for tool-specific setup.
-
-## Development
-
-Install the [Mintlify CLI](https://www.npmjs.com/package/mint) to preview your documentation changes locally. To install, use the following command:
-
-```
 npm i -g mint
-```
-
-Run the following command at the root of your documentation, where your `docs.json` is located:
-
-```
+cd docs
 mint dev
 ```
 
-View your local preview at `http://localhost:3000`.
+访问 `http://localhost:3000`。
 
-## Publishing changes
+## 品牌
 
-Install our GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app) to propagate changes from your repo to your deployment. Changes are deployed to production automatically after pushing to the default branch.
-
-## Need help?
-
-### Troubleshooting
-
-- If your dev environment isn't running: Run `mint update` to ensure you have the most recent version of the CLI.
-- If a page loads as a 404: Make sure you are running in a folder with a valid `docs.json`.
-
-### Resources
-- [Mintlify documentation](https://mintlify.com/docs)
+主题色与 Logo 见 `docs.json`（primary `#3486CF`，Logo 位于 `logo/`）。

@@ -1,20 +1,42 @@
 ---
-title: "Introduction"
-description: "Welcome to your project"
+title: "Introduction / 引言"
+description: "SunnyMeteo developer documentation — weather, climate, and environmental data APIs"
 ---
 
-Write a short description of your product here. What it does, who it's for, and what they can accomplish with it.
+SunnyMeteo（小晴天科技）为开发者与企业提供**高精度气象、气候与环境数据**服务，支持 REST API、SDK、MCP 与地图能力。
 
-<Tip>
-  Ready to make this your own? Start by editing this page. Update your `docs.json` file to customize your site. Then fill out the [Quickstart](/quickstart) page.
-</Tip>
+## 基础信息
 
-<Card title="Quickstart" icon="rocket" href="/quickstart">
-  This card links to the quickstart page in your project.
-</Card>
-<Card title="Components" icon="puzzle-piece" href="https://mintlify.com/docs/components">
-  Add cards, callouts, steps, tabs, and more to design and structure your pages.
-</Card>
-<Card title="Settings" icon="gear" href="https://mintlify.com/docs/organize/settings">
-  Set your site name, branding, and navigation in the `docs.json` file.
+| 项目 | 说明 |
+|------|------|
+| 生产 API 基址 | `https://api.sunnymeteo.com` |
+| 协议 | HTTPS + JSON（UTF-8） |
+| 鉴权 | `X-API-Key` 请求头 |
+| 稳定前缀 | `/v1/...` |
+
+## 文档结构
+
+文档按 **引言 → 通用技术说明 → 产品 → 平台 → 数据字典** 组织，便于按业务场景查阅，而非按单个接口罗列。
+
+<CardGroup cols={2}>
+  <Card title="Integrations / 通用技术说明" icon="plug" href="/integrations/api">
+    API、SDK、MCP、Map 接入方式
+  </Card>
+  <Card title="Products / 产品" icon="cloud-sun" href="/products/current-weather">
+    实况、预报、历史、灾害、环境等产品能力
+  </Card>
+  <Card title="Platform / 平台" icon="layer-group" href="/platform/map-platform">
+    地图平台与行业 SaaS（规划中）
+  </Card>
+  <Card title="Reference / 数据字典" icon="book" href="/reference/weather-elements">
+    气象要素、单位、坐标、编码与状态码
+  </Card>
+</CardGroup>
+
+## API Explorer
+
+在线调试 OpenAPI 接口：
+
+<Card title="Open API Explorer" icon="code" href="https://api.sunnymeteo.com/docs">
+  在浏览器中测试 SunnyMeteo API
 </Card>
