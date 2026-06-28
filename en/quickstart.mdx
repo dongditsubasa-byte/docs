@@ -1,0 +1,35 @@
+---
+title: "Quickstart"
+description: "Get your first SunnyMeteo API request working in minutes"
+---
+
+This page walks you through your first SunnyMeteo API request.
+
+## Prerequisites
+
+- SunnyMeteo API key (`X-API-Key`)
+- Network access to `https://api.sunnymeteo.com`
+- Any HTTP client (curl, Postman, or an SDK)
+
+## Get started
+
+<Steps>
+  <Step title="Obtain an API key">
+    Contact SunnyMeteo for an API key, or create one in the console (coming soon).
+  </Step>
+  <Step title="Make your first request">
+    Request current weather by city ID or coordinates (example path; see API Explorer for the latest spec):
+
+    ```bash
+    curl -s "https://api.sunnymeteo.com/v1/weather/condition?cityId=101010100" \
+      -H "X-API-Key: YOUR_API_KEY"
+    ```
+  </Step>
+  <Step title="Explore products">
+    Browse **Products** in the sidebar for field definitions by use case.
+  </Step>
+</Steps>
+
+<Tip>
+  Need to debug live requests? Use the [API Explorer](https://api.sunnymeteo.com/docs) for full paths and parameters.
+</Tip>

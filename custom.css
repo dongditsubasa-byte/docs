@@ -1,0 +1,349 @@
+/**
+ * SunnyMeteo Docs — 侧栏与正文样式（参考 Xweather Weather API 文档）
+ * Mintlify mint 主题 DOM：ul.sidebar-group > li > button（一级）/ ul > li > a（二级）
+ */
+
+:root {
+  --sm-docs-bg: #eef4fa;
+  --sm-docs-primary: #3486cf;
+  --sm-docs-primary-deep: #2a52b8;
+  --sm-docs-border: #c5d9ea;
+  --sm-docs-font: Inter, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC",
+    "Helvetica Neue", Arial, sans-serif;
+  --sm-body-heading-size: 16.8px;
+  --sm-body-heading-leading: 17.5px;
+  --sm-sidebar-font-size: 16px;
+  --sm-sidebar-l1-leading: 20px;
+  --sm-sidebar-l2-leading: 18px;
+  --sm-sidebar-l1-py: 6px;
+  --sm-sidebar-l2-py: 4px;
+  --sm-sidebar-l1-gap: 4px;
+  --sm-sidebar-l2-gap: 3px;
+  --sm-sidebar-x: 0.75rem;
+  --sm-sidebar-l1-color: #64748b;
+  --sm-sidebar-l2-color: #7b8a9a;
+  --sm-sidebar-hover-color: #526070;
+  --sm-sidebar-icon-color: #94a3b8;
+  --sm-body-heading-color: var(--sm-sidebar-l1-color);
+  --sm-body-text-color: var(--sm-sidebar-l2-color);
+}
+
+html {
+  color-scheme: light;
+}
+
+body,
+#body-content,
+mdx-content,
+#content,
+#sidebar-content,
+#table-of-contents-content {
+  font-family: var(--sm-docs-font) !important;
+}
+
+#background-color,
+#body-content,
+#content-area,
+#content,
+#header,
+#navbar,
+#sidebar,
+#sidebar-content,
+#table-of-contents,
+#table-of-contents-content,
+#footer,
+footer,
+mdx-content {
+  background-color: var(--sm-docs-bg) !important;
+}
+
+#navbar {
+  border-bottom: 1px solid #d9e6f2 !important;
+}
+
+#sidebar {
+  border-right: 1px solid #d9e6f2 !important;
+}
+
+#table-of-contents {
+  border-left: 1px solid #d9e6f2 !important;
+}
+
+nav-logo a,
+nav-logo img,
+nav-logo svg,
+#navbar nav-logo img,
+#navbar nav-logo svg {
+  height: 2.125rem !important;
+  max-height: 2.125rem !important;
+  width: auto !important;
+}
+
+nav-logo {
+  min-height: 2.125rem !important;
+}
+
+#topbar-cta-button {
+  display: none !important;
+}
+
+mdx-content h1,
+mdx-content h2,
+mdx-content h3,
+mdx-content h4,
+mdx-content h5,
+mdx-content h6,
+#content h1,
+#content h2,
+#content h3,
+#content h4,
+#content h5,
+#content h6,
+#content-container mdx-content h1,
+#content-container mdx-content h2,
+#content-container mdx-content h3,
+#content-container mdx-content h4,
+#content-container mdx-content h5,
+#content-container mdx-content h6 {
+  font-family: var(--sm-docs-font) !important;
+  font-size: var(--sm-body-heading-size) !important;
+  line-height: var(--sm-body-heading-leading) !important;
+  font-weight: 600 !important;
+  color: var(--sm-body-heading-color) !important;
+}
+
+mdx-content h1 *,
+mdx-content h2 *,
+mdx-content h3 *,
+mdx-content h4 *,
+mdx-content h5 *,
+mdx-content h6 *,
+#content h1 *,
+#content h2 *,
+#content h3 *,
+#content h4 *,
+#content h5 *,
+#content h6 *,
+#content-container mdx-content h1 *,
+#content-container mdx-content h2 *,
+#content-container mdx-content h3 *,
+#content-container mdx-content h4 *,
+#content-container mdx-content h5 *,
+#content-container mdx-content h6 * {
+  color: inherit !important;
+}
+
+mdx-content,
+#content,
+#content-container mdx-content {
+  color: var(--sm-body-text-color) !important;
+}
+
+mdx-content p,
+mdx-content li,
+mdx-content td,
+mdx-content th,
+mdx-content blockquote,
+mdx-content ol,
+mdx-content ul,
+#content p,
+#content li,
+#content td,
+#content th,
+#content blockquote,
+#content ol,
+#content ul,
+#content-container mdx-content p,
+#content-container mdx-content li,
+#content-container mdx-content td,
+#content-container mdx-content th,
+#content-container mdx-content blockquote,
+#content-container mdx-content ol,
+#content-container mdx-content ul {
+  font-family: var(--sm-docs-font) !important;
+  color: var(--sm-body-text-color) !important;
+}
+
+mdx-content a:not([class]),
+#content a:not([class]),
+#content-container mdx-content a:not([data-component-name]) {
+  color: var(--sm-docs-primary) !important;
+}
+
+mdx-content a:not([class]):hover,
+#content a:not([class]):hover,
+#content-container mdx-content a:not([data-component-name]):hover {
+  color: var(--sm-sidebar-hover-color) !important;
+}
+
+mdx-content strong,
+mdx-content b,
+#content strong,
+#content b,
+#content-container mdx-content strong,
+#content-container mdx-content b {
+  color: var(--sm-body-heading-color) !important;
+}
+
+/* 右侧目录：与侧栏二级同色 */
+#table-of-contents-content a {
+  color: var(--sm-sidebar-l2-color) !important;
+}
+
+#table-of-contents-content a[data-active="true"],
+#table-of-contents-content a[aria-current="true"] {
+  color: var(--sm-docs-primary) !important;
+}
+
+#sidebar-content {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+  padding-left: var(--sm-sidebar-x) !important;
+  padding-right: var(--sm-sidebar-x) !important;
+  box-sizing: border-box !important;
+  font-size: var(--sm-sidebar-font-size) !important;
+}
+
+#sidebar-content::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+  display: none !important;
+}
+
+/* 顶部「开发者文档」标题 */
+#sidebar-content .sidebar-group-header {
+  padding-left: 0.25rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+#sidebar-content .sidebar-title {
+  font-size: 0.72rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: var(--sm-sidebar-l1-color) !important;
+}
+
+/* 一级分组：加粗 + 折叠箭头贴 sidebar 右缘 */
+#sidebar-content ul.sidebar-group {
+  gap: var(--sm-sidebar-l1-gap) !important;
+}
+
+#sidebar-content ul.sidebar-group > li {
+  margin: 0 0 var(--sm-sidebar-l1-gap) !important;
+}
+
+#sidebar-content ul.sidebar-group > li > button {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 0.5rem !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  padding-top: var(--sm-sidebar-l1-py) !important;
+  padding-bottom: var(--sm-sidebar-l1-py) !important;
+  padding-right: 0 !important;
+  margin: 0 !important;
+  min-height: unset !important;
+  line-height: var(--sm-sidebar-l1-leading) !important;
+  font-size: var(--sm-sidebar-font-size) !important;
+  font-weight: 700 !important;
+  font-family: var(--sm-docs-font) !important;
+  border-radius: 0 !important;
+  color: var(--sm-sidebar-l1-color) !important;
+  -webkit-font-smoothing: antialiased !important;
+}
+
+#sidebar-content ul.sidebar-group > li > button span {
+  font-weight: 700 !important;
+  font-size: var(--sm-sidebar-font-size) !important;
+  line-height: var(--sm-sidebar-l1-leading) !important;
+  color: var(--sm-sidebar-l1-color) !important;
+  text-shadow: -0.2px 0 0 currentColor, 0.2px 0 0 currentColor !important;
+}
+
+#sidebar-content ul.sidebar-group > li > button:hover,
+#sidebar-content ul.sidebar-group > li > button:hover span {
+  color: var(--sm-sidebar-hover-color) !important;
+}
+
+#sidebar-content ul.sidebar-group > li > button > div:first-child {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  text-align: left !important;
+}
+
+#sidebar-content ul.sidebar-group > li > button > div:last-child {
+  flex: 0 0 auto !important;
+  margin-left: auto !important;
+}
+
+#sidebar-content ul.sidebar-group > li > button svg {
+  margin: 0 !important;
+  color: var(--sm-sidebar-icon-color) !important;
+}
+
+#sidebar-content #navigation-items,
+#sidebar-content #navigation-items > div,
+#sidebar-content .relative.lg\:text-sm {
+  font-size: var(--sm-sidebar-font-size) !important;
+}
+
+/* 二级列表：左侧竖线 + 行距 */
+#sidebar-content ul.sidebar-group > li > ul {
+  margin-top: 2px !important;
+  margin-bottom: var(--sm-sidebar-l1-gap) !important;
+  margin-left: 0.25rem !important;
+  padding-left: 0.35rem !important;
+  border-left: 2px solid var(--sm-docs-border) !important;
+  gap: var(--sm-sidebar-l2-gap) !important;
+}
+
+#sidebar-content ul.sidebar-group > li > ul > li {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+#sidebar-content ul.sidebar-group > li > ul > li > a {
+  display: block !important;
+  padding-top: var(--sm-sidebar-l2-py) !important;
+  padding-bottom: var(--sm-sidebar-l2-py) !important;
+  padding-left: 0.5rem !important;
+  padding-right: 0.35rem !important;
+  min-height: unset !important;
+  line-height: var(--sm-sidebar-l2-leading) !important;
+  font-size: var(--sm-sidebar-font-size) !important;
+  font-weight: 500 !important;
+  font-family: var(--sm-docs-font) !important;
+  border-radius: 0 !important;
+  color: var(--sm-sidebar-l2-color) !important;
+}
+
+#sidebar-content ul.sidebar-group > li > ul > li > a:hover,
+#sidebar-content ul.sidebar-group > li > ul > li > a:hover span {
+  color: var(--sm-sidebar-hover-color) !important;
+}
+
+#sidebar-content ul.sidebar-group > li > ul > li > a span {
+  line-height: inherit !important;
+  font-size: inherit !important;
+}
+
+#sidebar-content ul.sidebar-group > li > ul > li[data-active] {
+  border-left-color: var(--sm-docs-primary) !important;
+}
+
+#sidebar-content ul.sidebar-group > li > ul > li[data-active] > a {
+  background: transparent !important;
+  color: var(--sm-docs-primary) !important;
+  font-weight: 600 !important;
+}
+
+#sidebar-content li[data-active] > a,
+#sidebar-content li[data-active] > button {
+  color: var(--sm-docs-primary) !important;
+}
+
+[data-component-name="theme-toggle"] {
+  display: none !important;
+}

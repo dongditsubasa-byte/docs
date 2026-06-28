@@ -8,6 +8,18 @@
     "light": "#74ACDF",
     "dark": "#2A52B8"
   },
+  "appearance": {
+    "default": "light",
+    "strict": true
+  },
+  "background": {
+    "color": {
+      "light": "#EEF4FA"
+    }
+  },
+  "fonts": {
+    "family": "Inter"
+  },
   "favicon": "/favicon.svg",
   "seo": {
     "metatags": {
@@ -16,89 +28,183 @@
   },
   "logo": {
     "light": "/logo/light_sunny.svg",
-    "dark": "/logo/dark_sunny.svg"
+    "dark": "/logo/dark_sunny.svg",
+    "href": "https://www.sunnymeteo.com/zh/"
   },
   "navbar": {
     "links": [
       {
         "label": "官网",
-        "href": "https://www.sunnymeteo.com"
+        "href": "https://www.sunnymeteo.com/zh/"
       },
       {
         "label": "Support",
         "href": "mailto:sunnylab2026@yeah.net"
       }
-    ],
-    "primary": {
-      "type": "button",
-      "label": "API Explorer",
-      "href": "https://api.sunnymeteo.com/docs"
-    }
+    ]
   },
   "navigation": {
-    "pages": [
+    "languages": [
       {
-        "group": "Introduction / 引言",
-        "pages": ["index", "quickstart"]
-      },
-      {
-        "group": "Integrations / 通用技术说明",
-        "pages": [
-          "integrations/api",
-          "integrations/sdk",
-          "integrations/mcp",
-          "integrations/map"
+        "language": "zh",
+        "default": true,
+        "footer": {
+          "socials": {
+            "website": "https://www.sunnymeteo.com/zh/"
+          }
+        },
+        "navbar": {
+          "links": [
+            {
+              "label": "官网",
+              "href": "https://www.sunnymeteo.com/zh/"
+            },
+            {
+              "label": "支持",
+              "href": "mailto:sunnylab2026@yeah.net"
+            }
+          ]
+        },
+        "groups": [
+          {
+            "group": "开发者文档",
+            "pages": [
+              {
+                "group": "引言",
+                "expanded": true,
+                "pages": ["zh/index", "zh/quickstart"]
+              },
+              {
+                "group": "通用技术说明",
+                "expanded": false,
+                "pages": [
+                  "zh/integrations/api",
+                  "zh/integrations/sdk",
+                  "zh/integrations/mcp",
+                  "zh/integrations/map"
+                ]
+              },
+              {
+                "group": "产品",
+                "expanded": false,
+                "pages": [
+                  "zh/products/current-weather",
+                  "zh/products/hourly-forecast",
+                  "zh/products/daily-forecast",
+                  "zh/products/historical-weather",
+                  "zh/products/disaster-alerts",
+                  "zh/products/air-quality",
+                  "zh/products/astronomy",
+                  "zh/products/ocean",
+                  "zh/products/earthquake",
+                  "zh/products/typhoon",
+                  "zh/products/climate"
+                ]
+              },
+              {
+                "group": "平台",
+                "expanded": false,
+                "pages": [
+                  "zh/platform/map-platform",
+                  "zh/platform/solar-meteo-saas",
+                  "zh/platform/wind-meteo-saas"
+                ]
+              },
+              {
+                "group": "数据字典",
+                "expanded": false,
+                "pages": [
+                  "zh/reference/weather-elements",
+                  "zh/reference/units",
+                  "zh/reference/coordinate-systems",
+                  "zh/reference/location-codes",
+                  "zh/reference/status-codes"
+                ]
+              }
+            ]
+          }
         ]
       },
       {
-        "group": "Products / 产品",
-        "pages": [
-          "products/current-weather",
-          "products/hourly-forecast",
-          "products/daily-forecast",
-          "products/historical-weather",
-          "products/disaster-alerts",
-          "products/air-quality",
-          "products/astronomy",
-          "products/ocean",
-          "products/earthquake",
-          "products/typhoon",
-          "products/climate"
-        ]
-      },
-      {
-        "group": "Platform / 平台",
-        "pages": [
-          "platform/map-platform",
-          "platform/solar-meteo-saas",
-          "platform/wind-meteo-saas"
-        ]
-      },
-      {
-        "group": "Reference / 数据字典",
-        "pages": [
-          "reference/weather-elements",
-          "reference/units",
-          "reference/coordinate-systems",
-          "reference/location-codes",
-          "reference/status-codes"
+        "language": "en",
+        "footer": {
+          "socials": {
+            "website": "https://www.sunnymeteo.com/en/"
+          }
+        },
+        "navbar": {
+          "links": [
+            {
+              "label": "Website",
+              "href": "https://www.sunnymeteo.com/en/"
+            },
+            {
+              "label": "Support",
+              "href": "mailto:sunnylab2026@yeah.net"
+            }
+          ]
+        },
+        "groups": [
+          {
+            "group": "Documentation",
+            "pages": [
+              {
+                "group": "Introduction",
+                "expanded": true,
+                "pages": ["en/index", "en/quickstart"]
+              },
+              {
+                "group": "Integrations",
+                "expanded": false,
+                "pages": [
+                  "en/integrations/api",
+                  "en/integrations/sdk",
+                  "en/integrations/mcp",
+                  "en/integrations/map"
+                ]
+              },
+              {
+                "group": "Products",
+                "expanded": false,
+                "pages": [
+                  "en/products/current-weather",
+                  "en/products/hourly-forecast",
+                  "en/products/daily-forecast",
+                  "en/products/historical-weather",
+                  "en/products/disaster-alerts",
+                  "en/products/air-quality",
+                  "en/products/astronomy",
+                  "en/products/ocean",
+                  "en/products/earthquake",
+                  "en/products/typhoon",
+                  "en/products/climate"
+                ]
+              },
+              {
+                "group": "Platform",
+                "expanded": false,
+                "pages": [
+                  "en/platform/map-platform",
+                  "en/platform/solar-meteo-saas",
+                  "en/platform/wind-meteo-saas"
+                ]
+              },
+              {
+                "group": "Reference",
+                "expanded": false,
+                "pages": [
+                  "en/reference/weather-elements",
+                  "en/reference/units",
+                  "en/reference/coordinate-systems",
+                  "en/reference/location-codes",
+                  "en/reference/status-codes"
+                ]
+              }
+            ]
+          }
         ]
       }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "API Explorer",
-          "href": "https://api.sunnymeteo.com/docs",
-          "icon": "code"
-        },
-        {
-          "anchor": "官网",
-          "href": "https://www.sunnymeteo.com",
-          "icon": "globe"
-        }
-      ]
-    }
+    ]
   },
   "contextual": {
     "options": [
@@ -114,7 +220,7 @@
   },
   "footer": {
     "socials": {
-      "website": "https://www.sunnymeteo.com"
+      "website": "https://www.sunnymeteo.com/zh/"
     }
   }
 }
