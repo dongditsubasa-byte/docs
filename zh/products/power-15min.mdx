@@ -1,0 +1,92 @@
+---
+title: 新能源场站气象预报
+description: 新能源场站未来15天逐15分钟气象预报
+---
+## 接口概述
+
+在小时预报基础上线性插值到 15 分钟；天气现象沿用所属预报小时。兼容路径 `/power/minutely`。
+
+| 项目 | 说明 |
+|------|------|
+| 覆盖范围 | 有效光伏/风电场站 |
+| 更新频率 | 随小时预报批次更新（北京时间 06:00 / 19:00） |
+| 时区 | 业务时间多为北京时间；场站预报库内为 UTC，响应同时提供本地时间 |
+| 鉴权 | 请求头 `X-API-Key`；需开通对应模块权限 |
+
+### 相关参考
+
+- [小时预报](/zh/products/power-hourly)
+- [天气现象代码](/zh/reference/weather-codes)
+
+## 请求
+
+```
+GET /v1/power/15min
+GET /power/15min
+GET /v1/power/minutely   # 兼容别名
+```
+
+### 查询参数
+
+| 参数 | 类型 | 必填 | 说明 |
+|------|------|------|------|
+| `station_alias` | string | 三选一 | 场站内部别名（优先），如 `PVSDCW` |
+| `station_name` | string | 三选一 | 场站名称 |
+| `lat` | number | 与 lon 成对 | 纬度；匹配最近有效场站 |
+| `lon` | number | 与 lat 成对 | 经度 |
+| `format` | string | 否 | `json`/`csv`/`tsv`/`xml`/`yaml` |
+
+## 响应
+
+字段与 [小时预报](/zh/products/power-hourly) 的 `points[]` **相同**，时间分辨率为 15 分钟。
+
+| 字段英文名 | 类型 | 单位 | 中文名 |
+|------------|------|------|--------|
+| `forecast_time` | string | ISO8601 UTC | 预报时刻 |
+| `forecast_time_local` | string | ISO8601 | 本地时刻 |
+| `weather_code` | integer | — | 小晴天天气现象代码 |
+| `weather_text` | string | — | 天气现象中文名 |
+| `openmeteo_weather_code` | integer | WMO | Open-Meteo 原始代码 |
+| `temperature_2m` | number | ℃ | 2m 气温 |
+| `relative_humidity_2m` | number | % | 2m 相对湿度 |
+| `dew_point_2m` | number | ℃ | 露点 |
+| `apparent_temperature` | number | ℃ | 体感温度 |
+| `precipitation_probability` | number | % | 降水概率 |
+| `precipitation` | number | mm | 总降水量 |
+| `rain` | number | mm | 降雨量 |
+| `showers` | number | mm | 阵雨量 |
+| `snowfall` | number | cm | 降雪量 |
+| `snow_depth` | number | m | 积雪深度 |
+| `pressure_msl` | number | hPa | 海平面气压 |
+| `surface_pressure` | number | hPa | 地面气压 |
+| `cloud_cover` | number | % | 总云量 |
+| `cloud_cover_low` | number | % | 低云量 |
+| `cloud_cover_mid` | number | % | 中云量 |
+| `cloud_cover_high` | number | % | 高云量 |
+| `visibility` | number | m | 能见度 |
+| `evapotranspiration` | number | mm | 蒸散 |
+| `et0_fao_evapotranspiration` | number | mm | FAO 参考蒸散 |
+| `vapour_pressure_deficit` | number | kPa | 水汽压差 |
+| `wind_speed_10m` | number | m/s | 10m 风速 |
+| `wind_speed_80m` | number | m/s | 80m 风速 |
+| `wind_speed_120m` | number | m/s | 120m 风速 |
+| `wind_speed_180m` | number | m/s | 180m 风速 |
+| `wind_direction_10m` | number | ° | 10m 风向 |
+| `wind_direction_80m` | number | ° | 80m 风向 |
+| `wind_direction_120m` | number | ° | 120m 风向 |
+| `wind_direction_180m` | number | ° | 180m 风向 |
+| `wind_gusts_10m` | number | m/s | 10m 阵风 |
+| `temperature_80m` | number | ℃ | 80m 气温 |
+| `temperature_120m` | number | ℃ | 120m 气温 |
+| `temperature_180m` | number | ℃ | 180m 气温 |
+| `soil_temperature_0cm` | number | ℃ | 地表土壤温度 |
+| `soil_moisture_0_to_1cm` | number | m³/m³ | 0–1cm 土壤湿度 |
+| `shortwave_radiation` | number | W/m² | 短波辐射 |
+| `direct_radiation` | number | W/m² | 直接辐射 |
+| `diffuse_radiation` | number | W/m² | 散射辐射 |
+| `direct_normal_irradiance` | number | W/m² | DNI |
+| `global_tilted_irradiance` | number | W/m² | GTI |
+| `terrestrial_radiation` | number | W/m² | 地外辐射 |
+| `tilt` | number | ° | 倾角 |
+| `capacity_mw` | number | MW | 装机容量 |
+| `power` | number | MW | 估算发电功率；仅 `is_power=true` 的光伏站有值，否则为空 |

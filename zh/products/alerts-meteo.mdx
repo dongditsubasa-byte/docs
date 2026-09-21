@@ -1,0 +1,58 @@
+---
+title: 全国气象预警
+description: 查询全国生效中的气象预警
+---
+## 接口概述
+
+返回全国或指定城市**当前生效**的气象预警，按城市分组。
+
+| 项目 | 说明 |
+|------|------|
+| 覆盖范围 | 中国大陆 |
+| 更新频率 | 约每 10 分钟更新 |
+| 时区 | 业务时间多为北京时间；场站预报库内为 UTC，响应同时提供本地时间 |
+| 鉴权 | 请求头 `X-API-Key`；需开通对应模块权限 |
+
+### 相关参考
+
+- [城市列表](/zh/reference/location-codes)
+
+## 请求
+
+```
+GET /v1/weather/alerts/meteo
+GET /weather/alerts/meteo
+```
+
+### 查询参数
+
+| 参数 | 类型 | 必填 | 说明 |
+|------|------|------|------|
+| `all` | boolean | 否 | `true` 时返回全国全部生效预警，此时勿再传城市参数 |
+| `city_uid` / `city_code` / `city_name` / `lat`+`lon` | — | all=false 时需要 | 城市定位 |
+| `format` | string | 否 | 响应格式 |
+
+## 响应字段
+
+### `alerts.cities[]`
+
+| 字段英文名 | 类型 | 单位 | 中文名 |
+|------------|------|------|--------|
+| `city_uid` | integer | — | 城市 ID |
+| `city_code` | string | — | GB2260 代码 |
+| `city_name` | string | — | 城市名 |
+| `parent_city` | string | — | 上级城市 |
+| `province` | string | — | 省份 |
+| `alerts` | array | — | 该城市预警列表 |
+
+### `cities[].alerts[]`
+
+| 字段英文名 | 类型 | 单位 | 中文名 |
+|------------|------|------|--------|
+| `alarm_id` | string | — | 预警 ID |
+| `title` | string | — | 标题 |
+| `type` | string | — | 预警类型 |
+| `warning_type_id` | integer | — | 类型 ID |
+| `level` | string | — | 等级（蓝/黄/橙/红等） |
+| `description` | string | — | 正文 |
+| `pub_time` | string | ISO8601 | 发布时间 |

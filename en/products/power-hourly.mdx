@@ -1,0 +1,95 @@
+---
+title: "Station hourly forecast"
+description: "Hourly weather and power for ~15 days at renewable stations"
+---
+
+## Overview
+
+Returns hourly weather from local midnight for ~15 days; PV stations include pvlib power estimates.
+
+| Item | Details |
+|------|---------|
+| Coverage | Active PV / wind stations |
+| Update frequency | Twice daily at 06:00 and 19:00 Beijing time (`past_days=1` + `forecast_days=16`) |
+| Timezone | Business times are usually Beijing time; station forecast store uses UTC and responses also include local time |
+| Auth | `X-API-Key` header; module grant required |
+
+### Related
+
+- [Weather codes](/en/reference/weather-codes)
+- [Wind scale](/en/reference/wind-scale)
+- [15-minute forecast](/en/products/power-15min)
+
+## Request
+
+```
+GET /v1/power/hourly
+GET /power/hourly
+```
+
+### Query parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `station_alias` | string | one of three | Internal station alias (preferred), e.g. `PVSDCW` |
+| `station_name` | string | one of three | Station name |
+| `lat` | number | with lon | Latitude; nearest active station |
+| `lon` | number | with lat | Longitude |
+| `format` | string | no | `json`/`csv`/`tsv`/`xml`/`yaml` |
+
+## Response
+
+Shape: `{ station, timezone, display_tz, count, points[] }`.
+
+### `points[]` fields
+
+| Field | Type | Unit | Description |
+|-------|------|------|-------------|
+| `forecast_time` | string | ISO8601 UTC | Forecast time |
+| `forecast_time_local` | string | ISO8601 | Local time |
+| `weather_code` | integer | — | SunnyMeteo weather code |
+| `weather_text` | string | — | Weather name (Chinese) |
+| `openmeteo_weather_code` | integer | WMO | Raw Open-Meteo code |
+| `temperature_2m` | number | ℃ | 2m temperature |
+| `relative_humidity_2m` | number | % | 2m relative humidity |
+| `dew_point_2m` | number | ℃ | Dew point |
+| `apparent_temperature` | number | ℃ | Apparent temperature |
+| `precipitation_probability` | number | % | Precipitation probability |
+| `precipitation` | number | mm | Total precipitation |
+| `rain` | number | mm | Rain |
+| `showers` | number | mm | Showers |
+| `snowfall` | number | cm | Snowfall |
+| `snow_depth` | number | m | Snow depth |
+| `pressure_msl` | number | hPa | MSL pressure |
+| `surface_pressure` | number | hPa | Surface pressure |
+| `cloud_cover` | number | % | Total cloud cover |
+| `cloud_cover_low` | number | % | Low cloud |
+| `cloud_cover_mid` | number | % | Mid cloud |
+| `cloud_cover_high` | number | % | High cloud |
+| `visibility` | number | m | Visibility |
+| `evapotranspiration` | number | mm | Evapotranspiration |
+| `et0_fao_evapotranspiration` | number | mm | FAO reference ET |
+| `vapour_pressure_deficit` | number | kPa | Vapour pressure deficit |
+| `wind_speed_10m` | number | m/s | 10m wind speed |
+| `wind_speed_80m` | number | m/s | 80m wind speed |
+| `wind_speed_120m` | number | m/s | 120m wind speed |
+| `wind_speed_180m` | number | m/s | 180m wind speed |
+| `wind_direction_10m` | number | ° | 10m wind direction |
+| `wind_direction_80m` | number | ° | 80m wind direction |
+| `wind_direction_120m` | number | ° | 120m wind direction |
+| `wind_direction_180m` | number | ° | 180m wind direction |
+| `wind_gusts_10m` | number | m/s | 10m gusts |
+| `temperature_80m` | number | ℃ | 80m temperature |
+| `temperature_120m` | number | ℃ | 120m temperature |
+| `temperature_180m` | number | ℃ | 180m temperature |
+| `soil_temperature_0cm` | number | ℃ | Surface soil temperature |
+| `soil_moisture_0_to_1cm` | number | m³/m³ | 0–1cm soil moisture |
+| `shortwave_radiation` | number | W/m² | Shortwave radiation |
+| `direct_radiation` | number | W/m² | Direct radiation |
+| `diffuse_radiation` | number | W/m² | Diffuse radiation |
+| `direct_normal_irradiance` | number | W/m² | DNI |
+| `global_tilted_irradiance` | number | W/m² | GTI |
+| `terrestrial_radiation` | number | W/m² | Extraterrestrial radiation |
+| `tilt` | number | ° | Tilt |
+| `capacity_mw` | number | MW | Installed capacity |
+| `power` | number | MW | Estimated power; only for PV stations with `is_power=true`, otherwise null |

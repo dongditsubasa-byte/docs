@@ -1,0 +1,56 @@
+---
+title: 全国增量灾害预警
+description: 按时间戳查询发布/解除/升级增量
+---
+## 接口概述
+
+按 Unix 时间戳拉取全国增量灾害预警（含发布 Alert、解除 Cancel、升级 Update）。
+
+| 项目 | 说明 |
+|------|------|
+| 覆盖范围 | 中国大陆；历史窗口约 1 天 |
+| 更新频率 | 约每 30 分钟更新 |
+| 时区 | 业务时间多为北京时间；场站预报库内为 UTC，响应同时提供本地时间 |
+| 鉴权 | 请求头 `X-API-Key`；需开通对应模块权限 |
+
+### 相关参考
+
+- [城市列表](/zh/reference/location-codes)
+
+## 请求
+
+```
+GET /v1/weather/alerts/all
+GET /weather/alerts/all
+```
+
+### 查询参数
+
+| 参数 | 类型 | 必填 | 说明 |
+|------|------|------|------|
+| `start` | integer | **是** | Unix 时间戳（秒），最早支持约 1 天前 |
+| `city_uid` / `city_code` / `city_name` / `lat`+`lon` | — | 否 | 可选按城市过滤 |
+| `format` | string | 否 | 响应格式 |
+
+## 响应字段（`alerts.items[]`）
+
+| 字段英文名 | 类型 | 单位 | 中文名 |
+|------------|------|------|--------|
+| `alarm_id` | string | — | 预警 ID |
+| `status` | string | — | `Alert` / `Cancel` / `Update` |
+| `title` | string | — | 标题 |
+| `type` | string | — | 类型名称 |
+| `type_id` | integer | — | 类型 ID |
+| `level` | string | — | 等级名称 |
+| `level_id` | integer | — | 等级 ID |
+| `description` | string | — | 描述 |
+| `pub_time` | string | ISO8601 | 发布时间 |
+| `expires_at` | string | ISO8601 | 过期时间 |
+| `region_id` | string | — | 区域 ID |
+| `city_uid` | integer | — | 城市 ID |
+| `city_code` | string | — | 城市代码 |
+| `city_name` | string | — | 城市名 |
+| `parent_city` | string | — | 上级城市 |
+| `province` | string | — | 省份 |
+| `sender` | string | — | 发布单位 |
+| `references` | string | — | 关联预警引用 |

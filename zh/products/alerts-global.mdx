@@ -1,0 +1,56 @@
+---
+title: 海外气象预警
+description: 按国家或经纬度查询海外气象灾害预警
+---
+## 接口概述
+
+返回指定国家或经纬度点附近的海外气象预警（upcoming / active，不含已过期）。
+
+| 项目 | 说明 |
+|------|------|
+| 覆盖范围 | 全球部分国家（按国家代码或坐标） |
+| 更新频率 | 约每小时更新 |
+| 时区 | 业务时间多为北京时间；场站预报库内为 UTC，响应同时提供本地时间 |
+| 鉴权 | 请求头 `X-API-Key`；需开通对应模块权限 |
+
+### 相关参考
+
+- [状态码](/zh/reference/status-codes)
+
+## 请求
+
+```
+GET /v1/weather/alerts/global
+GET /weather/alerts/global
+```
+
+### 查询参数
+
+| 参数 | 类型 | 必填 | 说明 |
+|------|------|------|------|
+| `country_code` | string | 与坐标二选一 | 国家代码，如 `us`、`jp` |
+| `lat` | number | 与 lon 成对 | 纬度 |
+| `lon` | number | 与 lat 成对 | 经度 |
+| `format` | string | 否 | 响应格式 |
+
+`country_code` 与 `lat`/`lon` **不可同时使用**。
+
+## 响应字段（`alerts.alerts[]`）
+
+| 字段英文名 | 类型 | 单位 | 中文名 |
+|------------|------|------|--------|
+| `country_code` | string | — | 国家/地区代码 |
+| `title` | string | — | 预警标题 |
+| `feature_title` | string | — | 空间要素标题 |
+| `status` | string | — | `active` / `upcoming` |
+| `warning_type_id` | integer | — | 预警类型 ID |
+| `warning_type_code` | string | — | 类型缩写 |
+| `warning_type_name` | string | — | 类型英文名 |
+| `severity_flag` | string | — | 严重等级标识 |
+| `severity_code` | number | — | 严重等级代码 |
+| `warning_group` | string | — | 分组，如 LAND/MARINE |
+| `issuer` | string | — | 发布机构 |
+| `effective_from` | string | ISO8601 | 生效时间 |
+| `effective_until` | string | ISO8601 | 解除时间 |
+| `timezone` | string | — | IANA 时区 |
+| `external_id` | string | — | 外部唯一 ID |

@@ -1,18 +1,38 @@
 ---
-title: "REST API"
-description: "SunnyMeteo REST API overview, authentication, and conventions"
+title: "Auth & rate limits"
+description: "SunnyMeteo REST API authentication, module grants, and rate limits"
 ---
 
-<Note>
-  This page is a placeholder. Full content is coming soon.
-</Note>
+## Request headers
 
-## Overview
+```http
+GET /v1/weather/condition?city_name=Beijing HTTP/1.1
+Host: api.sunnymeteo.com
+X-API-Key: your_api_key_here
+Accept: application/json
+```
 
-REST API access: base URL, authentication, rate limits, versioning, and common request/response formats.
+## Module grants
 
+Access is granted **per module**. Unauthorized modules return `403`. Common modules:
 
-## Related
+| Module code | Endpoints |
+|-------------|-----------|
+| `condition` | `/weather/condition` |
+| `24hourly` / `360hourly` | Hourly forecasts |
+| `15daily` / `life_index` | 15-day / life index |
+| `aqi` / `aqi_hourly` | Air quality |
+| `power_*` | Station APIs |
+| `earthquake_*` / `typhoon_*` | Disaster APIs |
+| `global_alerts` / `meteo_alerts` / `all_alerts` | Alerts |
 
-- [Status codes](/reference/status-codes)
-- [API Explorer](https://api.sunnymeteo.com/docs)
+## Rate limits
+
+- Gateway: ~10 req/s per IP (burst 20)
+- Application: optional per-user / per-module quotas
+
+Exceeding limits returns HTTP `429`. See [Status codes](/en/reference/status-codes).
+
+## Get a key
+
+Request a trial or production key via [Contact us](https://sunnymeteo.com/contact/).

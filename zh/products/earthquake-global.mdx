@@ -1,0 +1,48 @@
+---
+title: 全球地震
+description: 查询全球地震目录
+---
+## 接口概述
+
+按起始时间查询 USGS 全球地震事件。
+
+| 项目 | 说明 |
+|------|------|
+| 覆盖范围 | 全球；接口历史窗口约 1 天 |
+| 更新频率 | 约每 10 分钟更新 |
+| 时区 | 业务时间多为北京时间；场站预报库内为 UTC，响应同时提供本地时间 |
+| 鉴权 | 请求头 `X-API-Key`；需开通对应模块权限 |
+
+### 相关参考
+
+- [中国地震](/zh/products/earthquake)
+
+## 请求
+
+```
+GET /v1/disasters/earthquake/global
+GET /disasters/earthquake/global
+```
+
+### 查询参数
+
+| 参数 | 类型 | 必填 | 说明 |
+|------|------|------|------|
+| `startfrom` | integer | **是** | Unix 时间戳（秒） |
+
+## 响应字段（`earthquakes.items[]`）
+
+| 字段英文名 | 类型 | 单位 | 中文名 |
+|------------|------|------|--------|
+| `id` | string | — | USGS 事件 ID |
+| `title` | string | — | 事件标题 |
+| `mag` | number | — | 震级 |
+| `type` | string | — | 事件类型 |
+| `lat` | number | ° | 纬度 |
+| `long` | number | ° | 经度 |
+| `city` | string | — | 城市 |
+| `country` | string | — | 国家 |
+| `timestamp` | integer | s | 发震 Unix 秒（UTC） |
+| `dateTimeISO` | string | ISO8601 | 发震时间 UTC |
+| `updatedTimestamp` | integer | s | 更新 Unix 秒 |
+| `updatedDateTimeISO` | string | ISO8601 | 更新时间 |

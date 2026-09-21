@@ -1,12 +1,109 @@
 ---
-title: "Current weather"
-description: "Real-time weather conditions for cities and coordinates"
+title: "Current conditions"
+description: "Query current weather conditions for Chinese cities"
 ---
-
-<Note>
-  This page is a placeholder. Full content is coming soon.
-</Note>
 
 ## Overview
 
-City or coordinate-based conditions: temperature, humidity, wind, precipitation, and weather codes.
+Returns **fused current conditions** for a city: temperature, humidity, wind, precipitation, visibility, weather phenomena, and more.
+
+| Item | Details |
+|------|---------|
+| Coverage | Major cities in mainland China (see [City list](/en/reference/location-codes)) |
+| Update frequency | About every 15 minutes |
+| Timezone | Business times are usually Beijing time; station forecast store uses UTC and responses also include local time |
+| Auth | `X-API-Key` header; module grant required |
+
+### Related
+
+- [Weather codes](/en/reference/weather-codes)
+- [Wind scale](/en/reference/wind-scale)
+- [City list](/en/reference/location-codes)
+
+## Request
+
+```
+GET /v1/weather/condition
+GET /weather/condition
+```
+
+### Query parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `city_uid` | integer | one of four | Internal city ID (highest priority) |
+| `city_code` | string | one of four | GB2260 admin code, e.g. `110000` |
+| `city_name` | string | one of four | City name, e.g. `Beijing` |
+| `lat` | number | with lon | Latitude -90~90 |
+| `lon` | number | with lat | Longitude -180~180 |
+| `format` | string | no | Response format: `json` (default) / `csv` / `tsv` / `xml` / `yaml` |
+
+### Example
+
+```bash
+curl -s "https://api.sunnymeteo.com/v1/weather/condition?city_name=Beijing" \
+  -H "X-API-Key: YOUR_KEY"
+```
+
+## Response
+
+### JSON shape
+
+```json
+{
+  "city": {
+    "city_uid": 11000001,
+    "city_code": "110000",
+    "city_name": "北京市",
+    "parent_city_name": "北京市",
+    "parent_province_name": "北京市"
+  },
+  "condition": {
+    "update_time": "2026-08-24T07:00:00+08:00",
+    "weather_code": 1,
+    "weather_cn": "晴",
+    "temp": 28.5,
+    "humidity": 45,
+    "wind_speed": 3.2,
+    "wind_level": 2,
+    "precip_1h": 0.0,
+    "vis": 10000
+  }
+}
+```
+
+### `city` fields
+
+| Field | Type | Unit | Description |
+|-------|------|------|-------------|
+| `city_uid` | integer | — | Internal city ID |
+| `city_code` | string | — | GB2260 code |
+| `city_name` | string | — | City name |
+| `parent_city_name` | string | — | Parent city / district |
+| `parent_province_name` | string | — | Province |
+
+### `condition` fields
+
+| Field | Type | Unit | Description |
+|-------|------|------|-------------|
+| `update_time` | string | ISO8601 | Source update time |
+| `weather_code` | integer | — | Weather phenomenon code (see reference) |
+| `weather_cn` | string | — | Weather name (Chinese) |
+| `temp` | number | ℃ | Temperature |
+| `dewpoint` | number | ℃ | Dew point |
+| `real_feel` | number | ℃ | Feels-like temperature |
+| `humidity` | number | % | Relative humidity |
+| `pressure` | number | hPa | Station pressure |
+| `mlsp` | number | hPa | Mean sea-level pressure |
+| `wind_dir` | string | — | Wind direction text |
+| `wind_degrees` | number | ° | Wind direction angle (0–360) |
+| `wind_speed` | number | m/s | Wind speed |
+| `wind_level` | number | Beaufort | Beaufort wind force |
+| `gust_speed` | number | m/s | Gust speed |
+| `gust_level` | number | Beaufort | Gust force |
+| `precip_1h` | number | mm | 1-hour precipitation |
+| `snow_1h` | number | mm | 1-hour snowfall |
+| `cloud` | number | % | Total cloud cover |
+| `vis` | number | m | Visibility |
+| `uvi` | number | — | UV index |
+| `solar` | number | W/m² | Solar radiation |

@@ -1,0 +1,49 @@
+---
+title: 全球台风详情
+description: 单个台风路径、预报与误差锥
+---
+## 接口概述
+
+按 `storm_id` 返回台风当前位置、历史路径、预报与误差锥等。
+
+| 项目 | 说明 |
+|------|------|
+| 覆盖范围 | 全球 |
+| 更新频率 | 约每小时更新 |
+| 时区 | 业务时间多为北京时间；场站预报库内为 UTC，响应同时提供本地时间 |
+| 鉴权 | 请求头 `X-API-Key`；需开通对应模块权限 |
+
+### 相关参考
+
+- [全球台风目录](/zh/products/typhoon)
+
+## 请求
+
+```
+GET /v1/disasters/typhoon/detail
+GET /disasters/typhoon/detail
+```
+
+### 查询参数
+
+| 参数 | 类型 | 必填 | 说明 |
+|------|------|------|------|
+| `storm_id` | string | **是** | 如 `2024-WP-12` |
+
+## 响应字段（`typhoon.item`）
+
+| 字段英文名 | 类型 | 单位 | 中文名 |
+|------------|------|------|--------|
+| `currentLat` | number | ° | 当前纬度 |
+| `currentLon` | number | ° | 当前经度 |
+| `currentStormType` | string | — | 当前类型 |
+| `currentStormCat` | string | — | 当前等级 |
+| `currentStormName` | string | — | 当前等级名 |
+| `currentWindKTS` | number | kt | 当前风速 |
+| `currentPressureMB` | number | mb | 当前气压 |
+| `positionTimestamp` | integer | s | 位置时间戳 |
+| `positionDateTimeISO` | string | ISO8601 | 位置时间 |
+| `track` | array | — | 历史路径点 |
+| `forecast` | array | — | 预报路径点 |
+| `errorCone` | object | — | 误差锥 GeoJSON |
+| `breakPointAlerts` | array | — | 沿岸警戒信息 |

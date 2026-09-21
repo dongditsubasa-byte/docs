@@ -1,0 +1,47 @@
+---
+title: 中国台风详情
+description: 单个中国台风路径与预报
+---
+## 接口概述
+
+按 `typhoon_id` 返回中国台风当前位置、路径与预报。
+
+| 项目 | 说明 |
+|------|------|
+| 覆盖范围 | 西北太平洋及影响中国海域 |
+| 更新频率 | 约每小时更新 |
+| 时区 | 业务时间多为北京时间；场站预报库内为 UTC，响应同时提供本地时间 |
+| 鉴权 | 请求头 `X-API-Key`；需开通对应模块权限 |
+
+### 相关参考
+
+- [中国台风目录](/zh/products/typhoon-cn-info)
+
+## 请求
+
+```
+GET /v1/disasters/typhoon/cn/detail
+GET /disasters/typhoon/cn/detail
+```
+
+### 查询参数
+
+| 参数 | 类型 | 必填 | 说明 |
+|------|------|------|------|
+| `typhoon_id` | string | **是** | 如 `202401` 或 `2024_01` |
+
+## 响应字段（`typhoon.item`）
+
+| 字段英文名 | 类型 | 单位 | 中文名 |
+|------------|------|------|--------|
+| `currentLat` | number | ° | 当前纬度 |
+| `currentLon` | number | ° | 当前经度 |
+| `currentLevel` | string | — | 当前等级 |
+| `currentWindSpeed` | number | m/s | 当前风速 |
+| `currentPressure` | number | hPa | 当前气压 |
+| `moveSpeed` | number | — | 移动速度 |
+| `moveDirection` | string | — | 移动方向 |
+| `positionTimeTimestamp` | integer | s | 位置时间戳 |
+| `positionTimeISO` | string | ISO8601 | 位置时间 |
+| `track` | array | — | 历史路径 |
+| `forecast` | array | — | 预报路径 |

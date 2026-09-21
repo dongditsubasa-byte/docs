@@ -1,0 +1,59 @@
+---
+title: "China weather alerts"
+description: "Query active meteorological alerts across China"
+---
+
+## Overview
+
+Returns **currently active** meteorological alerts nationwide or for a city, grouped by city.
+
+| Item | Details |
+|------|---------|
+| Coverage | Mainland China |
+| Update frequency | About every 10 minutes |
+| Timezone | Business times are usually Beijing time; station forecast store uses UTC and responses also include local time |
+| Auth | `X-API-Key` header; module grant required |
+
+### Related
+
+- [City list](/en/reference/location-codes)
+
+## Request
+
+```
+GET /v1/weather/alerts/meteo
+GET /weather/alerts/meteo
+```
+
+### Query parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `all` | boolean | no | When `true`, return all active alerts nationwide; do not pass city params |
+| `city_uid` / `city_code` / `city_name` / `lat`+`lon` | — | when all=false | City locator |
+| `format` | string | no | Response format |
+
+## Response fields
+
+### `alerts.cities[]`
+
+| Field | Type | Unit | Description |
+|-------|------|------|-------------|
+| `city_uid` | integer | — | City ID |
+| `city_code` | string | — | GB2260 code |
+| `city_name` | string | — | City name |
+| `parent_city` | string | — | Parent city |
+| `province` | string | — | Province |
+| `alerts` | array | — | Alerts for this city |
+
+### `cities[].alerts[]`
+
+| Field | Type | Unit | Description |
+|-------|------|------|-------------|
+| `alarm_id` | string | — | Alert ID |
+| `title` | string | — | Title |
+| `type` | string | — | Alert type |
+| `warning_type_id` | integer | — | Type ID |
+| `level` | string | — | Level (blue/yellow/orange/red, etc.) |
+| `description` | string | — | Body text |
+| `pub_time` | string | ISO8601 | Publish time |

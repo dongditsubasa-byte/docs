@@ -1,18 +1,38 @@
 ---
-title: "REST 接口"
-description: "SunnyMeteo REST API 概览、鉴权与约定"
+title: "认证与限流"
+description: "SunnyMeteo REST API 鉴权、模块授权与限流"
 ---
 
-<Note>
-  本文档为占位页，完整内容即将发布。
-</Note>
+## 请求头
 
-## 概述
+```http
+GET /v1/weather/condition?city_name=北京市 HTTP/1.1
+Host: api.sunnymeteo.com
+X-API-Key: your_api_key_here
+Accept: application/json
+```
 
-REST API 接入说明：基址、鉴权、限流、版本约定与通用请求/响应格式。
+## 模块授权
 
+平台按**模块**为用户授权。未授权模块返回 `403`。常见模块：
 
-## 相关链接
+| 模块 code | 对应接口 |
+|-----------|----------|
+| `condition` | `/weather/condition` |
+| `24hourly` / `360hourly` | 小时预报 |
+| `15daily` / `life_index` | 15 日 / 生活指数 |
+| `aqi` / `aqi_hourly` | 空气质量 |
+| `power_*` | 场站相关 |
+| `earthquake_*` / `typhoon_*` | 灾害相关 |
+| `global_alerts` / `meteo_alerts` / `all_alerts` | 预警 |
 
-- [状态码](/reference/status-codes)
-- [API Explorer](https://api.sunnymeteo.com/docs)
+## 限流
+
+- 网关层：单 IP 约 10 req/s（突发 20）
+- 应用层：可按用户 / 模块配置配额
+
+超限返回 HTTP `429`。详见 [状态码](/zh/reference/status-codes)。
+
+## 获取 Key
+
+请通过 [联系我们](https://sunnymeteo.com/contact/) 申请测试或商用 Key。

@@ -48,7 +48,7 @@ mint dev
 ## 品牌与侧栏
 
 - 主题色见 `docs.json`（primary `#3486CF`）
-- 侧栏采用**嵌套分组**（`expanded` 控制折叠，参考 [Xweather Weather API](https://www.xweather.com/docs/weather-api)）
+- 侧栏按业务线分组（天气 / 空气质量 / 场站 / 灾害等），`expanded: true` 默认全部展开
 - 视觉微调见 `custom.css`（淡蓝背景、紧凑行距、隐藏滚动条）
 
 ## 主站链接

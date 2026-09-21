@@ -1,12 +1,51 @@
 ---
-title: "台风"
-description: "台风路径与强度预报"
+title: 全球台风目录
+description: 台风编号、名称、状态与海盆索引
 ---
+## 接口概述
 
-<Note>
-  本文档为占位页，完整内容即将发布。
-</Note>
+查询全球台风目录索引信息。
 
-## 概述
+| 项目 | 说明 |
+|------|------|
+| 覆盖范围 | 全球各海盆 |
+| 更新频率 | 约每小时更新 |
+| 时区 | 业务时间多为北京时间；场站预报库内为 UTC，响应同时提供本地时间 |
+| 鉴权 | 请求头 `X-API-Key`；需开通对应模块权限 |
 
-台风实况、路径预报与相关字段。
+### 相关参考
+
+- [全球台风详情](/zh/products/typhoon-detail)
+
+## 请求
+
+```
+GET /v1/disasters/typhoon/info
+GET /disasters/typhoon/info
+```
+
+### 查询参数
+
+| 参数 | 类型 | 必填 | 说明 |
+|------|------|------|------|
+| `startfrom` | integer | 否 | Unix 秒，默认近 10 年 |
+| `endto` | integer | 否 | Unix 秒，默认当前 |
+| `basin` | string | 否 | 海盆：AL/EP/CP/WP/IO/SH |
+| `is_active` | boolean | 否 | 是否仅活跃 |
+
+## 响应字段（`typhoons.items[]`）
+
+| 字段英文名 | 类型 | 单位 | 中文名 |
+|------------|------|------|--------|
+| `id` | string | — | 台风编号，如 2024-WP-12 |
+| `name` | string | — | 名称 |
+| `year` | integer | — | 年份 |
+| `event` | integer | — | 事件序号 |
+| `basinOrigin` | string | — | 起源海盆 |
+| `basinCurrent` | string | — | 当前海盆 |
+| `isActive` | boolean | — | 是否活跃 |
+| `maxStormType` | string | — | 生命史最强类型 |
+| `maxStormCat` | string | — | 最强等级 |
+| `maxStormName` | string | — | 最强等级名称 |
+| `maxWindKTS` | number | kt | 最大风速 |
+| `minPressureMB` | number | mb | 最低气压 |

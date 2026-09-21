@@ -1,12 +1,52 @@
 ---
-title: "Typhoon"
-description: "Typhoon track and intensity forecasts"
+title: "Global typhoon catalog"
+description: "Typhoon IDs, names, status, and basin index"
 ---
-
-<Note>
-  This page is a placeholder. Full content is coming soon.
-</Note>
 
 ## Overview
 
-Typhoon observations, track forecasts, and related fields.
+Query the global typhoon catalog index.
+
+| Item | Details |
+|------|---------|
+| Coverage | Global basins |
+| Update frequency | About hourly |
+| Timezone | Business times are usually Beijing time; station forecast store uses UTC and responses also include local time |
+| Auth | `X-API-Key` header; module grant required |
+
+### Related
+
+- [Global typhoon detail](/en/products/typhoon-detail)
+
+## Request
+
+```
+GET /v1/disasters/typhoon/info
+GET /disasters/typhoon/info
+```
+
+### Query parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `startfrom` | integer | no | Unix seconds; default ~last 10 years |
+| `endto` | integer | no | Unix seconds; default now |
+| `basin` | string | no | Basin: AL/EP/CP/WP/IO/SH |
+| `is_active` | boolean | no | Active only |
+
+## Response fields (`typhoons.items[]`)
+
+| Field | Type | Unit | Description |
+|-------|------|------|-------------|
+| `id` | string | — | Storm ID, e.g. 2024-WP-12 |
+| `name` | string | — | Name |
+| `year` | integer | — | Year |
+| `event` | integer | — | Event number |
+| `basinOrigin` | string | — | Origin basin |
+| `basinCurrent` | string | — | Current basin |
+| `isActive` | boolean | — | Active |
+| `maxStormType` | string | — | Peak type in lifecycle |
+| `maxStormCat` | string | — | Peak category |
+| `maxStormName` | string | — | Peak category name |
+| `maxWindKTS` | number | kt | Max wind |
+| `minPressureMB` | number | mb | Min pressure |

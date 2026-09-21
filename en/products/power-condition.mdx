@@ -1,0 +1,86 @@
+---
+title: "Irradiance conditions"
+description: "Satellite-based near-real-time irradiance"
+---
+
+## Overview
+
+Returns satellite irradiance from local midnight (display timezone) through the latest 15-minute slot, including solar geometry.
+
+| Item | Details |
+|------|---------|
+| Coverage | Active PV stations; Himawari source (East Asia & Western Pacific) |
+| Update frequency | Every 15 minutes (:00/:15/:30/:45) |
+| Timezone | Business times are usually Beijing time; station forecast store uses UTC and responses also include local time |
+| Auth | `X-API-Key` header; module grant required |
+
+### Related
+
+- [Station maintenance](/en/products/power-stations)
+- [Weather codes](/en/reference/weather-codes)
+
+## Request
+
+```
+GET /v1/power/condition
+GET /power/condition
+```
+
+### Query parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `station_alias` | string | one of three | Internal station alias (preferred), e.g. `PVSDCW` |
+| `station_name` | string | one of three | Station name |
+| `lat` | number | with lon | Latitude; nearest active station |
+| `lon` | number | with lat | Longitude |
+| `format` | string | no | `json`/`csv`/`tsv`/`xml`/`yaml` |
+
+## Response
+
+Shape: `{ station, timezone, display_tz, updatetime, count, points[] }`.
+
+### Top-level fields
+
+| Field | Type | Unit | Description |
+|-------|------|------|-------------|
+| `timezone` | string | — | Always `UTC` |
+| `display_tz` | string | — | Display timezone, e.g. Asia/Shanghai |
+| `updatetime` | string | ISO8601 | Latest series update time |
+| `count` | integer | — | Point count |
+
+### `station`
+
+| Field | Type | Unit | Description |
+|-------|------|------|-------------|
+| `station_alias` | string | — | Internal alias |
+| `station_name` | string | — | Station name |
+| `station_type` | string | — | Type: `pv` / `wind` |
+| `latitude` | number | ° | Latitude |
+| `longitude` | number | ° | Longitude |
+| `capacity_mw` | number | MW | Installed capacity |
+| `tilt` | number | ° | PV tilt |
+| `azimuth` | number | ° | Azimuth (0 = south) |
+| `is_power` | boolean | — | Whether power prediction is enabled |
+| `distance_km` | number | km | Distance when queried by lat/lon |
+
+### `points[]`
+
+| Field | Type | Unit | Description |
+|-------|------|------|-------------|
+| `forecast_time` | string | ISO8601 UTC | 15-minute slot time |
+| `forecast_time_local` | string | ISO8601 | Local time in display TZ |
+| `shortwave_radiation` | number | W/m² | Shortwave radiation (GHI) |
+| `direct_radiation` | number | W/m² | Direct radiation |
+| `diffuse_radiation` | number | W/m² | Diffuse radiation |
+| `direct_normal_irradiance` | number | W/m² | Direct normal irradiance (DNI) |
+| `shortwave_radiation_clear_sky` | number | W/m² | Clear-sky shortwave |
+| `global_tilted_irradiance` | number | W/m² | Global tilted irradiance (GTI) |
+| `terrestrial_radiation` | number | W/m² | Extraterrestrial radiation |
+| `tilt` | number | ° | Tilt |
+| `solar_elevation` | number | ° | Solar elevation |
+| `solar_hour_angle` | number | ° | Solar hour angle |
+| `solar_azimuth` | number | ° | Solar azimuth |
+| `is_interpolated` | boolean | — | Whether interpolated |
+| `quality_flag` | string | — | Quality flag |
+| `updatetime` | string | ISO8601 | Corresponding native observation time |

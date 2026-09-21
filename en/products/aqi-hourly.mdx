@@ -1,0 +1,67 @@
+---
+title: "AQI hourly forecast"
+description: "Hourly air quality forecast for Chinese cities"
+---
+
+## Overview
+
+Returns hourly AQI forecast for up to ~5 days ahead.
+
+| Item | Details |
+|------|---------|
+| Coverage | Major cities in mainland China |
+| Update frequency | About hourly |
+| Timezone | Business times are usually Beijing time; station forecast store uses UTC and responses also include local time |
+| Auth | `X-API-Key` header; module grant required |
+
+### Related
+
+- [AQI conditions](/en/products/air-quality)
+- [City list](/en/reference/location-codes)
+
+## Request
+
+```
+GET /v1/aqi/hourly
+GET /aqi/hourly
+```
+
+### Query parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `city_uid` | integer | one of four | Internal city ID (highest priority) |
+| `city_code` | string | one of four | GB2260 admin code, e.g. `110000` |
+| `city_name` | string | one of four | City name, e.g. `Beijing` |
+| `lat` | number | with lon | Latitude -90~90 |
+| `lon` | number | with lat | Longitude -180~180 |
+| `format` | string | no | Response format: `json` (default) / `csv` / `tsv` / `xml` / `yaml` |
+
+## Response
+
+Shape: `{ city, hourly: { update_time, hourly[] } }`.
+
+### `hourly[]` fields
+
+Same as AQI conditions, plus:
+
+| Field | Type | Unit | Description |
+|-------|------|------|-------------|
+| `forecast_time` | string | ISO8601 | Forecast time |
+| `update_time` | string | ISO8601 | Update time |
+| `aqi` | number | — | Air quality index |
+| `aqi_level` | number | 1–6 | Level number |
+| `aqi_level_name` | string | — | Level name (Excellent / Good / Light pollution…) |
+| `pm25` | number | μg/m³ | PM2.5 |
+| `pm10` | number | μg/m³ | PM10 |
+| `so2` | number | μg/m³ | Sulfur dioxide |
+| `no2` | number | μg/m³ | Nitrogen dioxide |
+| `o3` | number | μg/m³ | Ozone |
+| `co` | number | mg/m³ | Carbon monoxide |
+| `pm25_iaqi` | number | — | PM2.5 IAQI |
+| `pm10_iaqi` | number | — | PM10 IAQI |
+| `so2_iaqi` | number | — | SO₂ IAQI |
+| `no2_iaqi` | number | — | NO₂ IAQI |
+| `o3_iaqi` | number | — | O₃ IAQI |
+| `co_iaqi` | number | — | CO IAQI |
+| `primary_pollutant` | string | — | Primary pollutant |

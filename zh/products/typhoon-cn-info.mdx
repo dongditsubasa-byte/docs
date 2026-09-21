@@ -1,0 +1,49 @@
+---
+title: 中国台风目录
+description: 中国台风编号与状态索引
+---
+## 接口概述
+
+查询中国台风目录（编号、中英文名、海域、是否活跃等）。
+
+| 项目 | 说明 |
+|------|------|
+| 覆盖范围 | 西北太平洋及影响中国海域 |
+| 更新频率 | 约每小时更新 |
+| 时区 | 业务时间多为北京时间；场站预报库内为 UTC，响应同时提供本地时间 |
+| 鉴权 | 请求头 `X-API-Key`；需开通对应模块权限 |
+
+### 相关参考
+
+- [中国台风详情](/zh/products/typhoon-cn-detail)
+
+## 请求
+
+```
+GET /v1/disasters/typhoon/cn/info
+GET /disasters/typhoon/cn/info
+```
+
+### 查询参数
+
+| 参数 | 类型 | 必填 | 说明 |
+|------|------|------|------|
+| `startfrom` / `endto` | integer | 否 | Unix 秒 |
+| `year` | integer | 否 | 年份，如 2024 |
+| `is_active` | boolean | 否 | 是否仅活跃 |
+
+## 响应字段（`typhoons.items[]`）
+
+| 字段英文名 | 类型 | 单位 | 中文名 |
+|------------|------|------|--------|
+| `id` | string | — | 台风 ID |
+| `cnCode` | string | — | 国标编号，如 2401 |
+| `nameCn` | string | — | 中文名 |
+| `nameEn` | string | — | 英文名 |
+| `year` | integer | — | 年份 |
+| `serialNo` | integer | — | 年内序号 |
+| `seaArea` | string | — | 海域 |
+| `isActive` | boolean | — | 是否活跃 |
+| `maxLevel` | string | — | 最强等级 |
+| `maxWindSpeed` | number | m/s | 最大风速 |
+| `minPressure` | number | hPa | 最低气压 |

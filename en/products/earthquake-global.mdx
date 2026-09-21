@@ -1,0 +1,49 @@
+---
+title: "Global earthquakes"
+description: "Query the global earthquake catalog"
+---
+
+## Overview
+
+Query USGS global earthquake events from a start time.
+
+| Item | Details |
+|------|---------|
+| Coverage | Global; ~1-day history window via API |
+| Update frequency | About every 10 minutes |
+| Timezone | Business times are usually Beijing time; station forecast store uses UTC and responses also include local time |
+| Auth | `X-API-Key` header; module grant required |
+
+### Related
+
+- [China earthquakes](/en/products/earthquake)
+
+## Request
+
+```
+GET /v1/disasters/earthquake/global
+GET /disasters/earthquake/global
+```
+
+### Query parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `startfrom` | integer | **yes** | Unix timestamp (seconds) |
+
+## Response fields (`earthquakes.items[]`)
+
+| Field | Type | Unit | Description |
+|-------|------|------|-------------|
+| `id` | string | — | USGS event ID |
+| `title` | string | — | Event title |
+| `mag` | number | — | Magnitude |
+| `type` | string | — | Event type |
+| `lat` | number | ° | Latitude |
+| `long` | number | ° | Longitude |
+| `city` | string | — | City |
+| `country` | string | — | Country |
+| `timestamp` | integer | s | Origin Unix seconds (UTC) |
+| `dateTimeISO` | string | ISO8601 | Origin time UTC |
+| `updatedTimestamp` | integer | s | Update Unix seconds |
+| `updatedDateTimeISO` | string | ISO8601 | Update time |

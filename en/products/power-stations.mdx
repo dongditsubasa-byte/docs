@@ -1,0 +1,81 @@
+---
+title: "Station maintenance"
+description: "CRUD for PV / wind stations"
+---
+
+## Overview
+
+Maintain station master data (name, type, coordinates, capacity, tilt, etc.). The ingest layer clusters by coordinates before calling Open-Meteo.
+
+| Item | Details |
+|------|---------|
+| Coverage | User-defined stations (global coordinates allowed; satellite irradiance mainly covers Himawari East Asia) |
+| Update frequency | Immediate read/write; no scheduled download |
+| Timezone | Business times are usually Beijing time; station forecast store uses UTC and responses also include local time |
+| Auth | `X-API-Key` header; module grant required |
+
+### Related
+
+- [Irradiance conditions](/en/products/power-condition)
+- [Hourly forecast](/en/products/power-hourly)
+
+## Endpoints
+
+| Method | Path | Description |
+|--------|------|-------------|
+| GET | `/v1/power/stations` | List |
+| GET | `/v1/power/stations/{station_id}` | Detail |
+| POST | `/v1/power/stations` | Create |
+| PATCH | `/v1/power/stations/{station_id}` | Update |
+| DELETE | `/v1/power/stations/{station_id}` | Delete (soft by default) |
+
+### GET list parameters
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `station_type` | string | `pv` / `wind` |
+| `is_active` | boolean | Active flag |
+| `limit` | integer | 1–1000, default 200 |
+| `offset` | integer | Default 0 |
+
+### POST body
+
+| Field | Type | Unit | Description |
+|-------|------|------|-------------|
+| `station_alias` | string | — | Internal alias (required, unique) |
+| `station_name` | string | — | Name (required) |
+| `station_type` | string | — | `pv` or `wind` (required) |
+| `latitude` | number | ° | Latitude (required) |
+| `longitude` | number | ° | Longitude (required) |
+| `capacity_mw` | number | MW | Installed capacity |
+| `tilt` | number | ° | PV tilt; download default 45 if empty |
+| `azimuth` | number | ° | Azimuth |
+| `owner` | string | — | Owner |
+| `user_id` | string | — | User id |
+| `is_active` | boolean | — | Active, default true |
+| `is_power` | boolean | — | Enable power prediction, default false; when false, hourly/15min `power` is null |
+
+### DELETE parameters
+
+| Parameter | Description |
+|-----------|-------------|
+| `hard=true` | Hard delete; default soft delete (`is_active=false`) |
+
+### Station object in responses
+
+| Field | Type | Unit | Description |
+|-------|------|------|-------------|
+| `station_id` | integer | — | Station ID (admin) |
+| `station_alias` | string | — | Internal alias |
+| `station_name` | string | — | Station name |
+| `station_type` | string | — | Type: `pv` / `wind` |
+| `latitude` | number | ° | Latitude |
+| `longitude` | number | ° | Longitude |
+| `capacity_mw` | number | MW | Installed capacity |
+| `tilt` | number | ° | PV tilt |
+| `azimuth` | number | ° | Azimuth (0 = south) |
+| `is_power` | boolean | — | Power prediction enabled |
+| `distance_km` | number | km | Distance when queried by lat/lon |
+| `is_active` | boolean | — | Active |
+| `created_at` | string | ISO8601 | Created at |
+| `updated_at` | string | ISO8601 | Updated at |

@@ -1,12 +1,36 @@
 ---
 title: "Location codes"
-description: "City IDs and region codes"
+description: "City IDs, GB2260 codes, and China city list download"
 ---
 
-<Note>
-  This page is a placeholder. Full content is coming soon.
-</Note>
+City weather, AQI, and life-index APIs locate a city via `city_uid`, `city_code` (GB2260), `city_name`, or `lat`+`lon`.
 
-## Overview
+## Downloads
 
-City UIDs, administrative codes, and POI identifiers.
+- Excel (recommended): [china_cities.xlsx](/files/china_cities.xlsx)
+  - Sheet `cities`: city master data
+  - Sheet `weather_codes`: weather phenomenon codes
+- CSV: [weather_codes.csv](/files/weather_codes.csv)
+
+About **3228** active cities (see the attachment for the authoritative list).
+
+## Key fields
+
+| Field | Description |
+|-------|-------------|
+| `city_uid` | Internal city ID (request param `city_uid`) |
+| `city_code` | GB2260 code (request param `city_code`) |
+| `city_name_cn` | Chinese name (request may use `city_name`) |
+| `city_name_en` | English name |
+| `longitude` / `latitude` | Representative coordinates |
+| `parent_city_name_cn` | Parent city |
+| `parent_province_name_cn` | Province |
+| `timezone` | Timezone |
+
+## Refresh assets
+
+```bash
+cd ../sunnymeteo_web
+../weather_etl/.venv/bin/python scripts/export-docs-assets.py
+cp mintlify/assets/china_cities.xlsx ../docs/files/
+```

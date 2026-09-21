@@ -1,0 +1,50 @@
+---
+title: "Global typhoon detail"
+description: "Track, forecast, and error cone for a single storm"
+---
+
+## Overview
+
+Returns current position, historical track, forecast, and error cone for a `storm_id`.
+
+| Item | Details |
+|------|---------|
+| Coverage | Global |
+| Update frequency | About hourly |
+| Timezone | Business times are usually Beijing time; station forecast store uses UTC and responses also include local time |
+| Auth | `X-API-Key` header; module grant required |
+
+### Related
+
+- [Global typhoon catalog](/en/products/typhoon)
+
+## Request
+
+```
+GET /v1/disasters/typhoon/detail
+GET /disasters/typhoon/detail
+```
+
+### Query parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `storm_id` | string | **yes** | e.g. `2024-WP-12` |
+
+## Response fields (`typhoon.item`)
+
+| Field | Type | Unit | Description |
+|-------|------|------|-------------|
+| `currentLat` | number | ° | Current latitude |
+| `currentLon` | number | ° | Current longitude |
+| `currentStormType` | string | — | Current type |
+| `currentStormCat` | string | — | Current category |
+| `currentStormName` | string | — | Current category name |
+| `currentWindKTS` | number | kt | Current wind |
+| `currentPressureMB` | number | mb | Current pressure |
+| `positionTimestamp` | integer | s | Position timestamp |
+| `positionDateTimeISO` | string | ISO8601 | Position time |
+| `track` | array | — | Historical track points |
+| `forecast` | array | — | Forecast track points |
+| `errorCone` | object | — | Error cone GeoJSON |
+| `breakPointAlerts` | array | — | Coastal breakpoint alerts |

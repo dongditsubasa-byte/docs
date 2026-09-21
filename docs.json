@@ -67,60 +67,79 @@
         },
         "groups": [
           {
-            "group": "开发者文档",
+            "group": "入门",
+            "expanded": true,
             "pages": [
-              {
-                "group": "引言",
-                "expanded": true,
-                "pages": ["zh/index", "zh/quickstart"]
-              },
-              {
-                "group": "通用技术说明",
-                "expanded": false,
-                "pages": [
-                  "zh/integrations/api",
-                  "zh/integrations/sdk",
-                  "zh/integrations/mcp",
-                  "zh/integrations/map"
-                ]
-              },
-              {
-                "group": "产品",
-                "expanded": false,
-                "pages": [
-                  "zh/products/current-weather",
-                  "zh/products/hourly-forecast",
-                  "zh/products/daily-forecast",
-                  "zh/products/historical-weather",
-                  "zh/products/disaster-alerts",
-                  "zh/products/air-quality",
-                  "zh/products/astronomy",
-                  "zh/products/ocean",
-                  "zh/products/earthquake",
-                  "zh/products/typhoon",
-                  "zh/products/climate"
-                ]
-              },
-              {
-                "group": "平台",
-                "expanded": false,
-                "pages": [
-                  "zh/platform/map-platform",
-                  "zh/platform/solar-meteo-saas",
-                  "zh/platform/wind-meteo-saas"
-                ]
-              },
-              {
-                "group": "数据字典",
-                "expanded": false,
-                "pages": [
-                  "zh/reference/weather-elements",
-                  "zh/reference/units",
-                  "zh/reference/coordinate-systems",
-                  "zh/reference/location-codes",
-                  "zh/reference/status-codes"
-                ]
-              }
+              "zh/index",
+              "zh/quickstart",
+              "zh/integrations/api",
+              "zh/reference/status-codes"
+            ]
+          },
+          {
+            "group": "天气 API",
+            "expanded": true,
+            "pages": [
+              "zh/products/current-weather",
+              "zh/products/hourly-forecast",
+              "zh/products/hourly360-forecast",
+              "zh/products/daily-forecast",
+              "zh/products/life-index",
+              "zh/products/alerts-global",
+              "zh/products/alerts-meteo",
+              "zh/products/alerts-all"
+            ]
+          },
+          {
+            "group": "空气质量",
+            "expanded": true,
+            "pages": [
+              "zh/products/air-quality",
+              "zh/products/aqi-hourly"
+            ]
+          },
+          {
+            "group": "场站 API",
+            "expanded": true,
+            "pages": [
+              "zh/products/power-condition",
+              "zh/products/power-hourly",
+              "zh/products/power-15min"
+            ]
+          },
+          {
+            "group": "灾害 API",
+            "expanded": true,
+            "pages": [
+              "zh/products/disaster-alerts",
+              "zh/products/earthquake",
+              "zh/products/earthquake-global",
+              "zh/products/typhoon",
+              "zh/products/typhoon-detail",
+              "zh/products/typhoon-cn-info",
+              "zh/products/typhoon-cn-detail"
+            ]
+          },
+          {
+            "group": "其他产品",
+            "expanded": true,
+            "pages": [
+              "zh/products/historical-weather",
+              "zh/products/astronomy",
+              "zh/products/ocean",
+              "zh/products/climate"
+            ]
+          },
+          {
+            "group": "数据字典",
+            "expanded": true,
+            "pages": [
+              "zh/reference/weather-elements",
+              "zh/reference/weather-codes",
+              "zh/reference/wind-scale",
+              "zh/reference/units",
+              "zh/reference/coordinate-systems",
+              "zh/reference/location-codes"
             ]
           }
         ]
@@ -146,60 +165,79 @@
         },
         "groups": [
           {
-            "group": "Documentation",
+            "group": "Getting started",
+            "expanded": true,
             "pages": [
-              {
-                "group": "Introduction",
-                "expanded": true,
-                "pages": ["en/index", "en/quickstart"]
-              },
-              {
-                "group": "Integrations",
-                "expanded": false,
-                "pages": [
-                  "en/integrations/api",
-                  "en/integrations/sdk",
-                  "en/integrations/mcp",
-                  "en/integrations/map"
-                ]
-              },
-              {
-                "group": "Products",
-                "expanded": false,
-                "pages": [
-                  "en/products/current-weather",
-                  "en/products/hourly-forecast",
-                  "en/products/daily-forecast",
-                  "en/products/historical-weather",
-                  "en/products/disaster-alerts",
-                  "en/products/air-quality",
-                  "en/products/astronomy",
-                  "en/products/ocean",
-                  "en/products/earthquake",
-                  "en/products/typhoon",
-                  "en/products/climate"
-                ]
-              },
-              {
-                "group": "Platform",
-                "expanded": false,
-                "pages": [
-                  "en/platform/map-platform",
-                  "en/platform/solar-meteo-saas",
-                  "en/platform/wind-meteo-saas"
-                ]
-              },
-              {
-                "group": "Reference",
-                "expanded": false,
-                "pages": [
-                  "en/reference/weather-elements",
-                  "en/reference/units",
-                  "en/reference/coordinate-systems",
-                  "en/reference/location-codes",
-                  "en/reference/status-codes"
-                ]
-              }
+              "en/index",
+              "en/quickstart",
+              "en/integrations/api",
+              "en/reference/status-codes"
+            ]
+          },
+          {
+            "group": "Weather API",
+            "expanded": true,
+            "pages": [
+              "en/products/current-weather",
+              "en/products/hourly-forecast",
+              "en/products/hourly360-forecast",
+              "en/products/daily-forecast",
+              "en/products/life-index",
+              "en/products/alerts-global",
+              "en/products/alerts-meteo",
+              "en/products/alerts-all"
+            ]
+          },
+          {
+            "group": "Air quality",
+            "expanded": true,
+            "pages": [
+              "en/products/air-quality",
+              "en/products/aqi-hourly"
+            ]
+          },
+          {
+            "group": "Station API",
+            "expanded": true,
+            "pages": [
+              "en/products/power-condition",
+              "en/products/power-hourly",
+              "en/products/power-15min"
+            ]
+          },
+          {
+            "group": "Disaster API",
+            "expanded": true,
+            "pages": [
+              "en/products/disaster-alerts",
+              "en/products/earthquake",
+              "en/products/earthquake-global",
+              "en/products/typhoon",
+              "en/products/typhoon-detail",
+              "en/products/typhoon-cn-info",
+              "en/products/typhoon-cn-detail"
+            ]
+          },
+          {
+            "group": "Other products",
+            "expanded": true,
+            "pages": [
+              "en/products/historical-weather",
+              "en/products/astronomy",
+              "en/products/ocean",
+              "en/products/climate"
+            ]
+          },
+          {
+            "group": "Data dictionary",
+            "expanded": true,
+            "pages": [
+              "en/reference/weather-elements",
+              "en/reference/weather-codes",
+              "en/reference/wind-scale",
+              "en/reference/units",
+              "en/reference/coordinate-systems",
+              "en/reference/location-codes"
             ]
           }
         ]

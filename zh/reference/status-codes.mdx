@@ -1,12 +1,35 @@
 ---
-title: "状态码"
-description: "HTTP 与业务错误码"
+title: 状态码与错误
+description: HTTP 状态码与错误响应说明
 ---
 
-<Note>
-  本文档为占位页，完整内容即将发布。
-</Note>
+## HTTP 状态码
 
-## 概述
+| 状态码 | 英文 | 中文说明 |
+|--------|------|----------|
+| `200` | OK | 成功 |
+| `201` | Created | 创建成功（如新增场站、提交线索） |
+| `400` | Bad Request | 请求无法解析 |
+| `401` | Unauthorized | API Key 无效、缺失或过期 |
+| `403` | Forbidden | 无对应模块权限 |
+| `404` | Not Found | 城市 / 场站 / 数据不存在 |
+| `422` | Unprocessable Entity | 参数不合法（如 lat/lon 不成对、缺少必填项） |
+| `429` | Too Many Requests | 触发限流 |
+| `500` | Internal Server Error | 服务内部错误 |
+| `501` | Not Implemented | 功能尚未开放（如文件导出占位） |
 
-常见 HTTP 状态码与 API 业务错误码对照。
+## 错误响应示例
+
+```json
+{
+  "detail": "请提供 city_uid、city_code、city_name 或 lat+lon 之一"
+}
+```
+
+```json
+{
+  "detail": "Invalid API key"
+}
+```
+
+业务校验失败时，`detail` 为字符串或结构化说明，请以实际响应为准。

@@ -1,0 +1,57 @@
+---
+title: "China incremental disaster alerts"
+description: "Incremental publish / cancel / upgrade events by timestamp"
+---
+
+## Overview
+
+Pull incremental nationwide disaster alerts by Unix timestamp (Alert / Cancel / Update).
+
+| Item | Details |
+|------|---------|
+| Coverage | Mainland China; ~1-day history window |
+| Update frequency | About every 30 minutes |
+| Timezone | Business times are usually Beijing time; station forecast store uses UTC and responses also include local time |
+| Auth | `X-API-Key` header; module grant required |
+
+### Related
+
+- [City list](/en/reference/location-codes)
+
+## Request
+
+```
+GET /v1/weather/alerts/all
+GET /weather/alerts/all
+```
+
+### Query parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `start` | integer | **yes** | Unix timestamp (seconds); earliest ~1 day ago |
+| `city_uid` / `city_code` / `city_name` / `lat`+`lon` | — | no | Optional city filter |
+| `format` | string | no | Response format |
+
+## Response fields (`alerts.items[]`)
+
+| Field | Type | Unit | Description |
+|-------|------|------|-------------|
+| `alarm_id` | string | — | Alert ID |
+| `status` | string | — | `Alert` / `Cancel` / `Update` |
+| `title` | string | — | Title |
+| `type` | string | — | Type name |
+| `type_id` | integer | — | Type ID |
+| `level` | string | — | Level name |
+| `level_id` | integer | — | Level ID |
+| `description` | string | — | Description |
+| `pub_time` | string | ISO8601 | Publish time |
+| `expires_at` | string | ISO8601 | Expiry time |
+| `region_id` | string | — | Region ID |
+| `city_uid` | integer | — | City ID |
+| `city_code` | string | — | City code |
+| `city_name` | string | — | City name |
+| `parent_city` | string | — | Parent city |
+| `province` | string | — | Province |
+| `sender` | string | — | Issuing unit |
+| `references` | string | — | Related alert references |

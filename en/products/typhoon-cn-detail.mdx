@@ -1,0 +1,48 @@
+---
+title: "China typhoon detail"
+description: "Track and forecast for a single China typhoon"
+---
+
+## Overview
+
+Returns current position, track, and forecast for a China typhoon by `typhoon_id`.
+
+| Item | Details |
+|------|---------|
+| Coverage | Northwest Pacific and seas affecting China |
+| Update frequency | About hourly |
+| Timezone | Business times are usually Beijing time; station forecast store uses UTC and responses also include local time |
+| Auth | `X-API-Key` header; module grant required |
+
+### Related
+
+- [China typhoon catalog](/en/products/typhoon-cn-info)
+
+## Request
+
+```
+GET /v1/disasters/typhoon/cn/detail
+GET /disasters/typhoon/cn/detail
+```
+
+### Query parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `typhoon_id` | string | **yes** | e.g. `202401` or `2024_01` |
+
+## Response fields (`typhoon.item`)
+
+| Field | Type | Unit | Description |
+|-------|------|------|-------------|
+| `currentLat` | number | ° | Current latitude |
+| `currentLon` | number | ° | Current longitude |
+| `currentLevel` | string | — | Current level |
+| `currentWindSpeed` | number | m/s | Current wind speed |
+| `currentPressure` | number | hPa | Current pressure |
+| `moveSpeed` | number | — | Movement speed |
+| `moveDirection` | string | — | Movement direction |
+| `positionTimeTimestamp` | integer | s | Position timestamp |
+| `positionTimeISO` | string | ISO8601 | Position time |
+| `track` | array | — | Historical track |
+| `forecast` | array | — | Forecast track |

@@ -1,12 +1,35 @@
 ---
-title: "Status codes"
-description: "HTTP and business error codes"
+title: "Status codes & errors"
+description: "HTTP status codes and error response formats"
 ---
 
-<Note>
-  This page is a placeholder. Full content is coming soon.
-</Note>
+## HTTP status codes
 
-## Overview
+| Code | Meaning | Description |
+|------|---------|-------------|
+| `200` | OK | Success |
+| `201` | Created | Resource created (e.g. new station, lead) |
+| `400` | Bad Request | Request could not be parsed |
+| `401` | Unauthorized | API key missing, invalid, or expired |
+| `403` | Forbidden | No grant for the required module |
+| `404` | Not Found | City / station / data not found |
+| `422` | Unprocessable Entity | Invalid parameters (e.g. unpaired lat/lon, missing required fields) |
+| `429` | Too Many Requests | Rate limit exceeded |
+| `500` | Internal Server Error | Server error |
+| `501` | Not Implemented | Feature not available yet (e.g. file export placeholders) |
 
-Common HTTP status codes and SunnyMeteo business error codes.
+## Error response examples
+
+```json
+{
+  "detail": "Provide one of city_uid, city_code, city_name, or lat+lon"
+}
+```
+
+```json
+{
+  "detail": "Invalid API key"
+}
+```
+
+On validation failures, `detail` may be a string or a structured payload — treat the live response as authoritative.

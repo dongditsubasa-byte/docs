@@ -1,0 +1,51 @@
+---
+title: 天气现象代码
+description: 小晴天标准天气现象中英文对照
+---
+
+API 返回的 `weather_code` / `weather_cn`（场站接口另有 `weather_text`）均使用下表标准代码。
+
+可下载完整表：[china_cities.xlsx](/files/china_cities.xlsx) 中的 `weather_codes` 工作表，或 [weather_codes.csv](/files/weather_codes.csv)。
+
+## 标准代码表
+
+| weather_code | weather_cn | weather_en |
+|--------------|------------|------------|
+| 1 | 晴 | Clear / Sunny |
+| 2 | 多云 | Cloudy |
+| 3 | 阴 | Overcast |
+| 4 | 轻雾 | Mist |
+| 5 | 雾 | Fog |
+| 6 | 霾 | Haze |
+| 7 | 浮尘 | Floating dust |
+| 8 | 扬沙 | Blowing sand |
+| 9 | 沙尘暴 | Dust storm |
+| 10 | 强沙尘暴 | Severe dust storm |
+| 11 | 雨 | Rain |
+| 12 | 零星小雨 | Light rain patches |
+| 13 | 阵雨 | Shower |
+| 14 | 雷阵雨 | Thundershower |
+| 15 | 小雨 | Light rain |
+| 16 | 中雨 | Moderate rain |
+| 17 | 大雨 | Heavy rain |
+| 18 | 暴雨 | Storm |
+| 19 | 大暴雨 | Heavy storm |
+| 20 | 特大暴雨 | Severe storm |
+| 21 | 雨夹雪 | Sleet |
+| 22 | 雪 | Snow |
+| 23 | 零星小雪 | Light snow patches |
+| 24 | 阵雪 | Snow shower |
+| 25 | 吹雪 | Blowing snow |
+| 26 | 小雪 | Light snow |
+| 27 | 中雪 | Moderate snow |
+| 28 | 大雪 | Heavy snow |
+| 29 | 暴雪 | Snowstorm |
+| 30 | 大暴雪 | Heavy snowstorm |
+| 31 | 特大暴雪 | Severe snowstorm |
+| 32 | 冰雹 | Hail |
+| 33 | 冻雨 | Freezing rain |
+| 34 | 雷暴 | Thunderstorm |
+| 35 | 大风 | Strong wind |
+| 36 | 龙卷风 | Tornado |
+
+场站 Open-Meteo 原始 WMO 代码见响应字段 `openmeteo_weather_code`，服务端会映射为上表标准码。

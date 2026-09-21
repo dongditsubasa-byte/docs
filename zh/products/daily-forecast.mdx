@@ -1,12 +1,93 @@
 ---
-title: "15 日预报"
-description: "逐日天气预报"
+title: 15 日预报
+description: 查询中国城市 15 日逐日预报
 ---
+## 接口概述
 
-<Note>
-  本文档为占位页，完整内容即将发布。
-</Note>
+返回当天起共约 15 天的逐日预报，含昼/夜天气现象、气温、风力、降水概率等。
 
-## 概述
+| 项目 | 说明 |
+|------|------|
+| 覆盖范围 | 中国大陆主要城市 |
+| 更新频率 | 每日多次更新（通常数次） |
+| 时区 | 业务时间多为北京时间；场站预报库内为 UTC，响应同时提供本地时间 |
+| 鉴权 | 请求头 `X-API-Key`；需开通对应模块权限 |
 
-未来 15 日最高/最低温、天气现象、降水概率等。
+### 相关参考
+
+- [天气现象代码](/zh/reference/weather-codes)
+- [风速等级](/zh/reference/wind-scale)
+- [城市列表](/zh/reference/location-codes)
+
+## 请求
+
+```
+GET /v1/weather/15daily
+GET /weather/15daily
+```
+
+### 查询参数
+
+| 参数 | 类型 | 必填 | 说明 |
+|------|------|------|------|
+| `city_uid` | integer | 四选一 | 内部城市 ID，优先级最高 |
+| `city_code` | string | 四选一 | GB2260 行政区划代码，如 `110000` |
+| `city_name` | string | 四选一 | 城市名称，如 `北京市` |
+| `lat` | number | 与 lon 成对 | 纬度 -90~90 |
+| `lon` | number | 与 lat 成对 | 经度 -180~180 |
+| `format` | string | 否 | 响应格式：`json`（默认）/`csv`/`tsv`/`xml`/`yaml` |
+
+## 响应
+
+### JSON 结构
+
+```json
+{
+  "city": { "city_code": "440100", "city_name": "广州市" },
+  "daily": {
+    "update_time": "2026-08-24T07:30:00+08:00",
+    "daily": [
+      {
+        "forecast_date": "2026-08-24",
+        "weather_code_day": 2,
+        "weather_cn_day": "多云",
+        "weather_code_night": 1,
+        "weather_cn_night": "晴",
+        "temp_min": 26,
+        "temp_max": 33,
+        "pop_day": 20
+      }
+    ]
+  }
+}
+```
+
+### `daily.daily[]` 字段
+
+| 字段英文名 | 类型 | 单位 | 中文名 |
+|------------|------|------|--------|
+| `forecast_date` | string | YYYY-MM-DD | 预报日期 |
+| `weather_code_day` | integer | — | 白天天气现象代码 |
+| `weather_cn_day` | string | — | 白天天气中文名 |
+| `weather_code_night` | integer | — | 夜间天气现象代码 |
+| `weather_cn_night` | string | — | 夜间天气中文名 |
+| `temp_min` | number | ℃ | 最低气温 |
+| `temp_max` | number | ℃ | 最高气温 |
+| `wind_dir_day` | string | — | 白天风向 |
+| `wind_dir_night` | string | — | 夜间风向 |
+| `wind_degree_day` | number | ° | 白天风向角 |
+| `wind_degree_night` | number | ° | 夜间风向角 |
+| `wind_sd_day` | number | m/s | 白天风速 |
+| `wind_sd_night` | number | m/s | 夜间风速 |
+| `wind_level_day` | number | 级 | 白天风力等级 |
+| `wind_level_night` | number | 级 | 夜间风力等级 |
+| `pressure_day` | number | hPa | 白天气压 |
+| `pressure_night` | number | hPa | 夜间气压 |
+| `mslp_day` | number | hPa | 白天海平面气压 |
+| `mslp_night` | number | hPa | 夜间海平面气压 |
+| `humidity_day` | number | % | 白天相对湿度 |
+| `humidity_night` | number | % | 夜间相对湿度 |
+| `pop_day` | number | % | 白天降水概率 |
+| `pop_night` | number | % | 夜间降水概率 |
+| `rain_day` | number | mm | 白天降水量 |
+| `rain_night` | number | mm | 夜间降水量 |

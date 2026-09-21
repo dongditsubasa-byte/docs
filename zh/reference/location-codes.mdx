@@ -1,12 +1,36 @@
 ---
 title: "位置编码"
-description: "城市 ID 与区域编码"
+description: "城市 ID、GB2260 与中国城市列表下载"
 ---
 
-<Note>
-  本文档为占位页，完整内容即将发布。
-</Note>
+城市天气、AQI、生活指数等接口通过 `city_uid`、`city_code`（GB2260）、`city_name` 或 `lat`+`lon` 定位城市。
 
-## 概述
+## 下载附件
 
-城市 UID、行政编码与 POI 编码说明。
+- Excel（推荐）：[china_cities.xlsx](/files/china_cities.xlsx)
+  - 工作表 `cities`：城市主数据
+  - 工作表 `weather_codes`：天气现象代码
+- CSV：[weather_codes.csv](/files/weather_codes.csv)
+
+当前有效城市约 **3228** 条（以附件为准）。
+
+## 主要字段说明
+
+| 字段 | 说明 |
+|------|------|
+| `city_uid` | API 内部城市 ID（请求参数 `city_uid`） |
+| `city_code` | GB2260 代码（请求参数 `city_code`） |
+| `city_name_cn` | 中文名（请求可用 `city_name`） |
+| `city_name_en` | 英文名 |
+| `longitude` / `latitude` | 城市代表点经纬度 |
+| `parent_city_name_cn` | 上级城市 |
+| `parent_province_name_cn` | 所属省份 |
+| `timezone` | 时区 |
+
+## 定期更新
+
+```bash
+cd ../sunnymeteo_web
+../weather_etl/.venv/bin/python scripts/export-docs-assets.py
+cp mintlify/assets/china_cities.xlsx ../docs/files/
+```

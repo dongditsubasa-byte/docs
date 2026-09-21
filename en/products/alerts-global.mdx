@@ -1,0 +1,57 @@
+---
+title: "Global weather alerts"
+description: "Query overseas meteorological hazard alerts by country or coordinates"
+---
+
+## Overview
+
+Returns overseas weather alerts near a country or lat/lon point (upcoming / active; expired excluded).
+
+| Item | Details |
+|------|---------|
+| Coverage | Selected countries worldwide (by country code or coordinates) |
+| Update frequency | About hourly |
+| Timezone | Business times are usually Beijing time; station forecast store uses UTC and responses also include local time |
+| Auth | `X-API-Key` header; module grant required |
+
+### Related
+
+- [Status codes](/en/reference/status-codes)
+
+## Request
+
+```
+GET /v1/weather/alerts/global
+GET /weather/alerts/global
+```
+
+### Query parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `country_code` | string | XOR with coords | Country code, e.g. `us`, `jp` |
+| `lat` | number | with lon | Latitude |
+| `lon` | number | with lat | Longitude |
+| `format` | string | no | Response format |
+
+Do **not** combine `country_code` with `lat`/`lon`.
+
+## Response fields (`alerts.alerts[]`)
+
+| Field | Type | Unit | Description |
+|-------|------|------|-------------|
+| `country_code` | string | — | Country / region code |
+| `title` | string | — | Alert title |
+| `feature_title` | string | — | Spatial feature title |
+| `status` | string | — | `active` / `upcoming` |
+| `warning_type_id` | integer | — | Warning type ID |
+| `warning_type_code` | string | — | Type abbreviation |
+| `warning_type_name` | string | — | Type name (English) |
+| `severity_flag` | string | — | Severity flag |
+| `severity_code` | number | — | Severity code |
+| `warning_group` | string | — | Group, e.g. LAND/MARINE |
+| `issuer` | string | — | Issuing agency |
+| `effective_from` | string | ISO8601 | Effective from |
+| `effective_until` | string | ISO8601 | Effective until |
+| `timezone` | string | — | IANA timezone |
+| `external_id` | string | — | External unique ID |

@@ -1,0 +1,81 @@
+---
+title: "Life index"
+description: "Life indices for today and the next two days for Chinese cities"
+---
+
+## Overview
+
+Returns clothing, sport, car wash, UV, and other life indices with levels and advice text for 3 days (today + next two).
+
+| Item | Details |
+|------|---------|
+| Coverage | Major cities in mainland China |
+| Update frequency | About twice daily (morning / evening) |
+| Timezone | Business times are usually Beijing time; station forecast store uses UTC and responses also include local time |
+| Auth | `X-API-Key` header; module grant required |
+
+### Related
+
+- [City list](/en/reference/location-codes)
+
+## Request
+
+```
+GET /v1/weather/life
+GET /weather/life
+```
+
+### Query parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `city_uid` | integer | one of four | Internal city ID (highest priority) |
+| `city_code` | string | one of four | GB2260 admin code, e.g. `110000` |
+| `city_name` | string | one of four | City name, e.g. `Beijing` |
+| `lat` | number | with lon | Latitude -90~90 |
+| `lon` | number | with lat | Longitude -180~180 |
+| `format` | string | no | Response format: `json` (default) / `csv` / `tsv` / `xml` / `yaml` |
+
+## Response
+
+### JSON shape
+
+```json
+{
+  "city": { "city_name": "成都市" },
+  "forecast": {
+    "update_time": "2026-08-24T07:30:00+08:00",
+    "forecast": [
+      {
+        "forecast_date": "2026-08-24",
+        "indices": [
+          {
+            "life_id": 1,
+            "index_name": "穿衣",
+            "level": "舒适",
+            "level_num": 2,
+            "description": "建议穿薄外套或长袖衬衫。"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+### `forecast.forecast[]` fields
+
+| Field | Type | Unit | Description |
+|-------|------|------|-------------|
+| `forecast_date` | string | YYYY-MM-DD | Forecast date |
+| `indices` | array | — | Life indices for the day |
+
+### `indices[]` fields
+
+| Field | Type | Unit | Description |
+|-------|------|------|-------------|
+| `life_id` | integer | — | Index ID |
+| `index_name` | string | — | Index name |
+| `level` | string | — | Level label |
+| `level_num` | integer | — | Level number |
+| `description` | string | — | Advice text |

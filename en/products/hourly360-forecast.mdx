@@ -1,0 +1,76 @@
+---
+title: "360-hour forecast"
+description: "Hourly forecast for the next 360 hours for Chinese cities"
+---
+
+## Overview
+
+Returns hourly elements for the current hour plus the next 360 hours (~15 days). Fields match the 24-hour endpoint.
+
+| Item | Details |
+|------|---------|
+| Coverage | Major cities in mainland China |
+| Update frequency | About hourly |
+| Timezone | Business times are usually Beijing time; station forecast store uses UTC and responses also include local time |
+| Auth | `X-API-Key` header; module grant required |
+
+### Related
+
+- [24-hour forecast](/en/products/hourly-forecast)
+- [Weather codes](/en/reference/weather-codes)
+- [City list](/en/reference/location-codes)
+
+## Request
+
+```
+GET /v1/weather/360hourly
+GET /weather/360hourly
+```
+
+### Query parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `city_uid` | integer | one of four | Internal city ID (highest priority) |
+| `city_code` | string | one of four | GB2260 admin code, e.g. `110000` |
+| `city_name` | string | one of four | City name, e.g. `Beijing` |
+| `lat` | number | with lon | Latitude -90~90 |
+| `lon` | number | with lat | Longitude -180~180 |
+| `format` | string | no | Response format: `json` (default) / `csv` / `tsv` / `xml` / `yaml` |
+
+### Example
+
+```bash
+curl -s "https://api.sunnymeteo.com/v1/weather/360hourly?city_uid=1" \
+  -H "X-API-Key: YOUR_KEY"
+```
+
+## Response
+
+Same shape as [24-hour forecast](/en/products/hourly-forecast): `{ city, hourly: { update_time, hourly[] } }`.  
+Point fields below (same as 24-hour, more timesteps).
+
+| Field | Type | Unit | Description |
+|-------|------|------|-------------|
+| `forecast_time` | string | ISO8601 | Forecast hour (on the hour) |
+| `update_time` | string | ISO8601 | Source update time |
+| `weather_code` | integer | — | Weather phenomenon code (see reference) |
+| `weather_cn` | string | — | Weather name (Chinese) |
+| `temp` | number | ℃ | Temperature |
+| `dewpoint` | number | ℃ | Dew point |
+| `real_feel` | number | ℃ | Feels-like temperature |
+| `humidity` | number | % | Relative humidity |
+| `pressure` | number | hPa | Station pressure |
+| `mlsp` | number | hPa | Mean sea-level pressure |
+| `wind_dir` | string | — | Wind direction text |
+| `wind_degrees` | number | ° | Wind direction angle (0–360) |
+| `wind_speed` | number | m/s | Wind speed |
+| `wind_level` | number | Beaufort | Beaufort wind force |
+| `gust_speed` | number | m/s | Gust speed |
+| `gust_level` | number | Beaufort | Gust force |
+| `precip_1h` | number | mm | 1-hour precipitation |
+| `snow_1h` | number | mm | 1-hour snowfall |
+| `cloud` | number | % | Total cloud cover |
+| `vis` | number | m | Visibility |
+| `uvi` | number | — | UV index |
+| `solar` | number | W/m² | Solar radiation |

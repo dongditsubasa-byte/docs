@@ -1,12 +1,46 @@
 ---
-title: "Earthquake"
-description: "Earthquake events and seismic information"
+title: "China earthquake catalog"
+description: "China Earthquake Networks Center earthquake catalog"
 ---
-
-<Note>
-  This page is a placeholder. Full content is coming soon.
-</Note>
 
 ## Overview
 
-Domestic and global earthquake event listings and field definitions.
+Query China Earthquake Networks Center catalog records from a start time.
+
+| Item | Details |
+|------|---------|
+| Coverage | China and nearby; ~7-day history window via API |
+| Update frequency | About every 5 minutes |
+| Timezone | Business times are usually Beijing time; station forecast store uses UTC and responses also include local time |
+| Auth | `X-API-Key` header; module grant required |
+
+### Related
+
+- [Status codes](/en/reference/status-codes)
+
+## Request
+
+```
+GET /v1/disasters/earthquake/cn
+GET /disasters/earthquake/cn
+```
+
+### Query parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `startfrom` | integer | **yes** | Unix timestamp (seconds) |
+
+## Response fields (`earthquakes.items[]`)
+
+| Field | Type | Unit | Description |
+|-------|------|------|-------------|
+| `ceic_id` | string | — | Network unique ID |
+| `event_time` | string | ISO8601 | Origin time (Beijing time) |
+| `latitude` | number | ° | Latitude |
+| `longitude` | number | ° | Longitude |
+| `depth_km` | number | km | Focal depth |
+| `magnitude` | number | M | Magnitude |
+| `location` | string | — | Reference place name |
+| `city_uid` | integer | — | Nearest matched city ID |
+| `city_name` | string | — | Matched city name |

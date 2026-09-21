@@ -1,0 +1,26 @@
+---
+title: "Wind speed & Beaufort scale"
+description: "Beaufort force vs wind speed reference"
+---
+
+City weather APIs use Beaufort force for `wind_level` / `gust_level`; `wind_speed` is in **m/s**.
+
+## Beaufort scale (common)
+
+| Force | Name | Wind speed (m/s) | Wind speed (km/h) |
+|-------|------|------------------|-------------------|
+| 0 | Calm | 0.0–0.2 | < 1 |
+| 1 | Light air | 0.3–1.5 | 1–5 |
+| 2 | Light breeze | 1.6–3.3 | 6–11 |
+| 3 | Gentle breeze | 3.4–5.4 | 12–19 |
+| 4 | Moderate breeze | 5.5–7.9 | 20–28 |
+| 5 | Fresh breeze | 8.0–10.7 | 29–38 |
+| 6 | Strong breeze | 10.8–13.8 | 39–49 |
+| 7 | Near gale | 13.9–17.1 | 50–61 |
+| 8 | Gale | 17.2–20.7 | 62–74 |
+| 9 | Strong gale | 20.8–24.4 | 75–88 |
+| 10 | Storm | 24.5–28.4 | 89–102 |
+| 11 | Violent storm | 28.5–32.6 | 103–117 |
+| 12 | Hurricane | ≥ 32.7 | ≥ 118 |
+
+Station forecast wind fields are returned directly in **m/s** (`wind_speed_10m`, etc.) without a separate Beaufort level.

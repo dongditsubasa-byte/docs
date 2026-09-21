@@ -1,12 +1,63 @@
 ---
-title: "Air quality"
-description: "AQI and pollutant concentrations"
+title: "AQI conditions"
+description: "Current air quality for Chinese cities"
 ---
-
-<Note>
-  This page is a placeholder. Full content is coming soon.
-</Note>
 
 ## Overview
 
-AQI, PM2.5, PM10, and related air quality indices.
+Returns the city's current AQI plus primary pollutant concentrations and individual AQI indices.
+
+| Item | Details |
+|------|---------|
+| Coverage | Major cities in mainland China |
+| Update frequency | About hourly |
+| Timezone | Business times are usually Beijing time; station forecast store uses UTC and responses also include local time |
+| Auth | `X-API-Key` header; module grant required |
+
+### Related
+
+- [City list](/en/reference/location-codes)
+
+## Request
+
+```
+GET /v1/aqi/condition
+GET /aqi/condition
+```
+
+### Query parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `city_uid` | integer | one of four | Internal city ID (highest priority) |
+| `city_code` | string | one of four | GB2260 admin code, e.g. `110000` |
+| `city_name` | string | one of four | City name, e.g. `Beijing` |
+| `lat` | number | with lon | Latitude -90~90 |
+| `lon` | number | with lat | Longitude -180~180 |
+| `format` | string | no | Response format: `json` (default) / `csv` / `tsv` / `xml` / `yaml` |
+
+## Response
+
+Shape: `{ city, condition }`.
+
+### `condition` fields
+
+| Field | Type | Unit | Description |
+|-------|------|------|-------------|
+| `update_time` | string | ISO8601 | Update time |
+| `aqi` | number | — | Air quality index |
+| `aqi_level` | number | 1–6 | Level number |
+| `aqi_level_name` | string | — | Level name (Excellent / Good / Light pollution…) |
+| `pm25` | number | μg/m³ | PM2.5 |
+| `pm10` | number | μg/m³ | PM10 |
+| `so2` | number | μg/m³ | Sulfur dioxide |
+| `no2` | number | μg/m³ | Nitrogen dioxide |
+| `o3` | number | μg/m³ | Ozone |
+| `co` | number | mg/m³ | Carbon monoxide |
+| `pm25_iaqi` | number | — | PM2.5 IAQI |
+| `pm10_iaqi` | number | — | PM10 IAQI |
+| `so2_iaqi` | number | — | SO₂ IAQI |
+| `no2_iaqi` | number | — | NO₂ IAQI |
+| `o3_iaqi` | number | — | O₃ IAQI |
+| `co_iaqi` | number | — | CO IAQI |
+| `primary_pollutant` | string | — | Primary pollutant |

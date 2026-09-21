@@ -1,0 +1,50 @@
+---
+title: "China typhoon catalog"
+description: "China typhoon IDs and status index"
+---
+
+## Overview
+
+Query the China typhoon catalog (codes, CN/EN names, sea area, active flag, etc.).
+
+| Item | Details |
+|------|---------|
+| Coverage | Northwest Pacific and seas affecting China |
+| Update frequency | About hourly |
+| Timezone | Business times are usually Beijing time; station forecast store uses UTC and responses also include local time |
+| Auth | `X-API-Key` header; module grant required |
+
+### Related
+
+- [China typhoon detail](/en/products/typhoon-cn-detail)
+
+## Request
+
+```
+GET /v1/disasters/typhoon/cn/info
+GET /disasters/typhoon/cn/info
+```
+
+### Query parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `startfrom` / `endto` | integer | no | Unix seconds |
+| `year` | integer | no | Year, e.g. 2024 |
+| `is_active` | boolean | no | Active only |
+
+## Response fields (`typhoons.items[]`)
+
+| Field | Type | Unit | Description |
+|-------|------|------|-------------|
+| `id` | string | — | Typhoon ID |
+| `cnCode` | string | — | National code, e.g. 2401 |
+| `nameCn` | string | — | Chinese name |
+| `nameEn` | string | — | English name |
+| `year` | integer | — | Year |
+| `serialNo` | integer | — | Serial within year |
+| `seaArea` | string | — | Sea area |
+| `isActive` | boolean | — | Active |
+| `maxLevel` | string | — | Peak intensity level |
+| `maxWindSpeed` | number | m/s | Max wind speed |
+| `minPressure` | number | hPa | Min pressure |

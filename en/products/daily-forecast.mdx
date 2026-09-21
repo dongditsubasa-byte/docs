@@ -1,12 +1,94 @@
 ---
-title: "Daily forecast"
-description: "Multi-day daily weather forecasts"
+title: "15-day forecast"
+description: "Daily forecast for ~15 days for Chinese cities"
 ---
-
-<Note>
-  This page is a placeholder. Full content is coming soon.
-</Note>
 
 ## Overview
 
-Up to 15 days of daily high/low temperature, conditions, and precipitation probability.
+Returns about 15 days of daily forecast including day/night weather, temperature, wind, and precipitation probability.
+
+| Item | Details |
+|------|---------|
+| Coverage | Major cities in mainland China |
+| Update frequency | Several times per day |
+| Timezone | Business times are usually Beijing time; station forecast store uses UTC and responses also include local time |
+| Auth | `X-API-Key` header; module grant required |
+
+### Related
+
+- [Weather codes](/en/reference/weather-codes)
+- [Wind scale](/en/reference/wind-scale)
+- [City list](/en/reference/location-codes)
+
+## Request
+
+```
+GET /v1/weather/15daily
+GET /weather/15daily
+```
+
+### Query parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `city_uid` | integer | one of four | Internal city ID (highest priority) |
+| `city_code` | string | one of four | GB2260 admin code, e.g. `110000` |
+| `city_name` | string | one of four | City name, e.g. `Beijing` |
+| `lat` | number | with lon | Latitude -90~90 |
+| `lon` | number | with lat | Longitude -180~180 |
+| `format` | string | no | Response format: `json` (default) / `csv` / `tsv` / `xml` / `yaml` |
+
+## Response
+
+### JSON shape
+
+```json
+{
+  "city": { "city_code": "440100", "city_name": "广州市" },
+  "daily": {
+    "update_time": "2026-08-24T07:30:00+08:00",
+    "daily": [
+      {
+        "forecast_date": "2026-08-24",
+        "weather_code_day": 2,
+        "weather_cn_day": "多云",
+        "weather_code_night": 1,
+        "weather_cn_night": "晴",
+        "temp_min": 26,
+        "temp_max": 33,
+        "pop_day": 20
+      }
+    ]
+  }
+}
+```
+
+### `daily.daily[]` fields
+
+| Field | Type | Unit | Description |
+|-------|------|------|-------------|
+| `forecast_date` | string | YYYY-MM-DD | Forecast date |
+| `weather_code_day` | integer | — | Daytime weather code |
+| `weather_cn_day` | string | — | Daytime weather name (Chinese) |
+| `weather_code_night` | integer | — | Nighttime weather code |
+| `weather_cn_night` | string | — | Nighttime weather name (Chinese) |
+| `temp_min` | number | ℃ | Min temperature |
+| `temp_max` | number | ℃ | Max temperature |
+| `wind_dir_day` | string | — | Daytime wind direction |
+| `wind_dir_night` | string | — | Nighttime wind direction |
+| `wind_degree_day` | number | ° | Daytime wind angle |
+| `wind_degree_night` | number | ° | Nighttime wind angle |
+| `wind_sd_day` | number | m/s | Daytime wind speed |
+| `wind_sd_night` | number | m/s | Nighttime wind speed |
+| `wind_level_day` | number | Beaufort | Daytime wind force |
+| `wind_level_night` | number | Beaufort | Nighttime wind force |
+| `pressure_day` | number | hPa | Daytime pressure |
+| `pressure_night` | number | hPa | Nighttime pressure |
+| `mslp_day` | number | hPa | Daytime MSLP |
+| `mslp_night` | number | hPa | Nighttime MSLP |
+| `humidity_day` | number | % | Daytime relative humidity |
+| `humidity_night` | number | % | Nighttime relative humidity |
+| `pop_day` | number | % | Daytime precipitation probability |
+| `pop_night` | number | % | Nighttime precipitation probability |
+| `rain_day` | number | mm | Daytime precipitation |
+| `rain_night` | number | mm | Nighttime precipitation |
