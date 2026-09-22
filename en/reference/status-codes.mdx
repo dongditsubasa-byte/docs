@@ -1,35 +1,6 @@
 ---
 title: "Status codes & errors"
-description: "HTTP status codes and error response formats"
+description: "Merged into API usage"
 ---
 
-## HTTP status codes
-
-| Code | Meaning | Description |
-|------|---------|-------------|
-| `200` | OK | Success |
-| `201` | Created | Resource created (e.g. new station, lead) |
-| `400` | Bad Request | Request could not be parsed |
-| `401` | Unauthorized | API key missing, invalid, or expired |
-| `403` | Forbidden | No grant for the required module |
-| `404` | Not Found | City / station / data not found |
-| `422` | Unprocessable Entity | Invalid parameters (e.g. unpaired lat/lon, missing required fields) |
-| `429` | Too Many Requests | Rate limit exceeded |
-| `500` | Internal Server Error | Server error |
-| `501` | Not Implemented | Feature not available yet (e.g. file export placeholders) |
-
-## Error response examples
-
-```json
-{
-  "detail": "Provide one of city_uid, city_code, city_name, or lat+lon"
-}
-```
-
-```json
-{
-  "detail": "Invalid API key"
-}
-```
-
-On validation failures, `detail` may be a string or a structured payload — treat the live response as authoritative.
+This page has moved to [API usage](/en/api-guide#status-codes--errors).

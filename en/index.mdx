@@ -1,40 +1,61 @@
 ---
 title: "Introduction"
-description: "SunnyMeteo developer documentation — weather, climate, and environmental data APIs"
+description: "About Nanjing SunnyMeteo, products, and contact information"
 ---
 
-SunnyMeteo provides **high-precision weather, climate, and environmental data** for developers and enterprises via REST API, SDK, MCP, and map capabilities.
+## About us
 
-## Essentials
+**Nanjing SunnyMeteo Technology** (小晴天科技) delivers high-precision global weather, climate, and environmental data. Guided by *“Weather you can count on”*, we package multi-source fusion forecasts and AI capabilities as APIs, MCP, and SDKs for developers, enterprises, and AI applications.
+
+We aim to be a trusted partner for meteorological and environmental intelligence—bringing weather science from specialized domains into everyday products and decisions that support carbon neutrality, smart cities, and sustainable development in the AI era.
+
+## Products
+
+| Product line | What you get |
+|--------------|--------------|
+| **Weather API** | City conditions, 24h/360h and 15-day forecasts, life index, domestic & global alerts |
+| **Air quality** | AQI conditions and hourly forecast |
+| **Station API** | PV/wind station CRUD, satellite irradiance, hourly and 15-min weather/power forecasts |
+| **Disaster API** | China/global earthquake catalogs, global & China typhoon catalogs and track detail |
+| **Data dictionary** | Weather codes, Beaufort scale, city codes, units and coordinate conventions |
+
+See [API usage](/en/api-guide) for access details, or open the [API Explorer](https://api.sunnymeteo.com/docs).
+
+## Contact
 
 | Item | Details |
 |------|---------|
-| Production API base | `https://api.sunnymeteo.com` |
-| Protocol | HTTPS + JSON (UTF-8) |
-| Authentication | `X-API-Key` header |
-| Stable prefix | `/v1/...` |
+| Email | [sunnylab2026@yeah.net](mailto:sunnylab2026@yeah.net) |
+| Phone | [15650726750](tel:15650726750) |
+| Website | [www.sunnymeteo.com](https://www.sunnymeteo.com/en/) |
+| Sales / trial | [Contact us](https://www.sunnymeteo.com/en/about/) |
+
+Whether you need data access, custom solutions, or partnership opportunities, our team is ready to help.
 
 ## Documentation map
 
-Docs are organized as **Getting started → Weather / Air quality / Station / Disaster APIs → Other products → Data dictionary**, with related endpoints grouped in the sidebar.
+Jump to top-level sections:
 
 <CardGroup cols={2}>
+  <Card title="API usage" icon="book-open" href="/en/api-guide">
+    Quickstart, auth & rate limits, status codes; MCP / SDK will land here too
+  </Card>
   <Card title="Weather API" icon="cloud-sun" href="/en/products/current-weather">
-    Conditions, 24h/360h, 15-day, life index, and alerts
+    Conditions, hourly/daily forecasts, life index, and alerts
   </Card>
   <Card title="Air quality" icon="wind" href="/en/products/air-quality">
     AQI conditions and hourly forecast
   </Card>
   <Card title="Station API" icon="bolt" href="/en/products/power-hourly">
-    Station maintenance, irradiance, and power forecast
+    Irradiance conditions, hourly and 15-minute forecasts
+  </Card>
+  <Card title="Disaster API" icon="triangle-exclamation" href="/en/products/disaster-alerts">
+    Alert entry points, earthquakes, and typhoons
+  </Card>
+  <Card title="Other products" icon="layer-group" href="/en/products/historical-weather">
+    Historical weather, astronomy, ocean, climate (coming soon)
   </Card>
   <Card title="Data dictionary" icon="book" href="/en/reference/weather-codes">
-    Weather codes, wind scale, city codes, and status codes
+    Weather codes, wind scale, city codes, and element notes
   </Card>
 </CardGroup>
-
-## API Explorer
-
-<Card title="Open API Explorer" icon="code" href="https://api.sunnymeteo.com/docs">
-  Test SunnyMeteo APIs in your browser
-</Card>

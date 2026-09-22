@@ -1,0 +1,134 @@
+---
+title: "API 使用"
+description: "小晴天 API 通用技术说明：快速开始、鉴权限流、状态码；MCP / SDK 后续补充"
+---
+
+本页是 **SunnyMeteo（小晴天）API 的通用技术说明**：涵盖快速开始、认证与限流、状态码与错误。后续 **MCP、SDK** 等接入方式也会汇总在此。
+
+具体业务接口字段见左侧对应产品文档。
+
+## 基础信息
+
+| 项目 | 说明 |
+|------|------|
+| 生产 API 基址 | `https://api.sunnymeteo.com` |
+| 协议 | HTTPS + JSON（UTF-8） |
+| 鉴权 | 请求头 `X-API-Key` |
+| 稳定前缀 | `/v1/...`（无前缀路径仍兼容） |
+| 响应格式 | 默认 JSON；可用 `?format=` 协商 `csv` / `tsv` / `xml` / `yaml` |
+
+在线调试：[API Explorer](https://api.sunnymeteo.com/docs)
+
+---
+
+## 快速开始
+
+### 前置条件
+
+- SunnyMeteo API Key（`X-API-Key`）
+- 可访问 `https://api.sunnymeteo.com` 的网络环境
+- 任意 HTTP 客户端（curl、Postman 或后续 SDK）
+
+### 开始调用
+
+<Steps>
+  <Step title="获取 API Key">
+    通过 [联系我们](https://www.sunnymeteo.com/zh/about/) 申请测试或商用 Key，或在控制台创建密钥（即将开放）。
+  </Step>
+  <Step title="发起第一次请求">
+    使用城市名称、城市代码或经纬度请求实况天气：
+
+    ```bash
+    curl -s "https://api.sunnymeteo.com/v1/weather/condition?city_name=北京市" \
+      -H "X-API-Key: YOUR_API_KEY"
+    ```
+  </Step>
+  <Step title="查阅产品文档">
+    在左侧按 **天气 / 空气质量 / 场站 / 灾害 API** 查阅字段定义与示例。
+  </Step>
+</Steps>
+
+<Tip>
+  联调时优先使用 [API Explorer](https://api.sunnymeteo.com/docs) 核对最新路径与参数。
+</Tip>
+
+---
+
+## 认证与限流
+
+### 请求头
+
+```http
+GET /v1/weather/condition?city_name=北京市 HTTP/1.1
+Host: api.sunnymeteo.com
+X-API-Key: your_api_key_here
+Accept: application/json
+```
+
+### 模块授权
+
+平台按**模块**为用户授权。未授权模块返回 `403`。常见模块：
+
+| 模块 code | 对应接口 |
+|-----------|----------|
+| `condition` | `/weather/condition` |
+| `24hourly` / `360hourly` | 小时预报 |
+| `15daily` / `life_index` | 15 日 / 生活指数 |
+| `aqi` / `aqi_hourly` | 空气质量 |
+| `power_*` | 场站相关 |
+| `earthquake_*` / `typhoon_*` | 灾害相关 |
+| `global_alerts` / `meteo_alerts` / `all_alerts` | 预警 |
+
+### 限流
+
+- 网关层：单 IP 约 10 req/s（突发 20）
+- 应用层：可按用户 / 模块配置配额
+
+超限返回 HTTP `429`。
+
+### 获取 Key
+
+请通过 [联系我们](https://www.sunnymeteo.com/zh/about/) 或邮件 [sunnylab2026@yeah.net](mailto:sunnylab2026@yeah.net) 申请。
+
+---
+
+## 状态码与错误
+
+### HTTP 状态码
+
+| 状态码 | 英文 | 说明 |
+|--------|------|------|
+| `200` | OK | 成功 |
+| `201` | Created | 创建成功（如新增场站） |
+| `400` | Bad Request | 请求无法解析 |
+| `401` | Unauthorized | API Key 无效、缺失或过期 |
+| `403` | Forbidden | 无对应模块权限 |
+| `404` | Not Found | 城市 / 场站 / 数据不存在 |
+| `422` | Unprocessable Entity | 参数不合法（如 lat/lon 不成对、缺少必填项） |
+| `429` | Too Many Requests | 触发限流 |
+| `500` | Internal Server Error | 服务内部错误 |
+| `501` | Not Implemented | 功能尚未开放 |
+
+### 错误响应示例
+
+```json
+{
+  "detail": "请提供 city_uid、city_code、city_name 或 lat+lon 之一"
+}
+```
+
+```json
+{
+  "detail": "Invalid API key"
+}
+```
+
+业务校验失败时，`detail` 为字符串或结构化说明，请以实际响应为准。
+
+---
+
+## MCP / SDK（即将补充）
+
+<Note>
+  MCP 与各语言 SDK 的安装、鉴权与示例将统一补充在本页后续章节，便于与 REST API 共用同一套鉴权与错误约定。
+</Note>

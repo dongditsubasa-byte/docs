@@ -1,40 +1,61 @@
 ---
 title: "引言"
-description: "SunnyMeteo 开发者文档 — 气象、气候与环境数据 API"
+description: "南京小晴天科技简介、产品概览与联系方式"
 ---
 
-SunnyMeteo（小晴天科技）为开发者与企业提供**高精度气象、气候与环境数据**服务，支持 REST API、SDK、MCP 与地图能力。
+## 公司简介
 
-## 基础信息
+**南京小晴天科技**（SunnyMeteo）专注于全球高精度气象、气候与环境数据服务，以「让天气，成底气」为使命，将多源融合预报与 AI 能力，通过 API、MCP、SDK 等方式交付给开发者、企业与 AI 应用。
 
-| 项目 | 说明 |
+我们致力于成为气象环境数据与智能服务的可靠伙伴，推动气象科技从专业领域走向普惠应用，服务碳中和、智慧城市与 AI 时代的可持续发展。
+
+## 产品介绍
+
+| 产品线 | 能力概要 |
+|--------|----------|
+| **天气 API** | 城市实况、24/360 小时与 15 日预报、生活指数、国内外气象预警 |
+| **空气质量** | AQI 实况与逐小时预报 |
+| **场站 API** | 光伏/风电场站维护、卫星辐照度实况、小时与 15 分钟气象/功率预报 |
+| **灾害 API** | 中国/全球地震目录、全球与中国台风目录及路径详情 |
+| **数据字典** | 天气现象代码、风力等级、城市编码、单位与坐标系约定 |
+
+更多接入细节见 [API 使用](/zh/api-guide)；在线调试可打开 [API Explorer](https://api.sunnymeteo.com/docs)。
+
+## 联系方式
+
+| 项目 | 信息 |
 |------|------|
-| 生产 API 基址 | `https://api.sunnymeteo.com` |
-| 协议 | HTTPS + JSON（UTF-8） |
-| 鉴权 | `X-API-Key` 请求头 |
-| 稳定前缀 | `/v1/...` |
+| 邮箱 | [sunnylab2026@yeah.net](mailto:sunnylab2026@yeah.net) |
+| 电话 | [15650726750](tel:15650726750) |
+| 官网 | [www.sunnymeteo.com](https://www.sunnymeteo.com/zh/) |
+| 商务/试用 | [联系我们](https://www.sunnymeteo.com/zh/about/) |
 
-## 文档结构
+无论您需要气象数据接入、定制化方案，还是渠道合作，欢迎随时与我们联系。
 
-文档按 **入门 → 天气 / 空气质量 / 场站 / 灾害 API → 平台 → 数据字典** 组织，同类接口归在同一侧栏分组下。
+## 文档目录
+
+按侧栏一级分类快速进入：
 
 <CardGroup cols={2}>
+  <Card title="API 使用" icon="book-open" href="/zh/api-guide">
+    快速开始、鉴权限流、状态码；后续 MCP / SDK 说明也在此汇总
+  </Card>
   <Card title="天气 API" icon="cloud-sun" href="/zh/products/current-weather">
-    实况、24/360 小时、15 日、生活指数与预警
+    实况、小时/日预报、生活指数与预警
   </Card>
   <Card title="空气质量" icon="wind" href="/zh/products/air-quality">
     AQI 实况与小时预报
   </Card>
   <Card title="场站 API" icon="bolt" href="/zh/products/power-hourly">
-    场站维护、辐照度与功率预报
+    辐照度实况、小时与 15 分钟预报
+  </Card>
+  <Card title="灾害 API" icon="triangle-exclamation" href="/zh/products/disaster-alerts">
+    预警入口、地震与台风
+  </Card>
+  <Card title="其他产品" icon="layer-group" href="/zh/products/historical-weather">
+    历史天气、天文、海洋、气候（陆续完善）
   </Card>
   <Card title="数据字典" icon="book" href="/zh/reference/weather-codes">
-    天气现象、风速、城市编码与状态码
+    天气现象、风速、城市编码与要素说明
   </Card>
 </CardGroup>
-
-## API Explorer
-
-<Card title="Open API Explorer" icon="code" href="https://api.sunnymeteo.com/docs">
-  在浏览器中测试 SunnyMeteo API
-</Card>

@@ -1,0 +1,134 @@
+---
+title: "API usage"
+description: "SunnyMeteo API essentials: quickstart, auth & rate limits, status codes; MCP / SDK coming soon"
+---
+
+This page is the **shared technical guide** for SunnyMeteo APIs: quickstart, authentication & rate limits, and status codes / errors. **MCP and SDKs** will also be documented here.
+
+For product field definitions, use the corresponding pages in the sidebar.
+
+## Essentials
+
+| Item | Details |
+|------|---------|
+| Production API base | `https://api.sunnymeteo.com` |
+| Protocol | HTTPS + JSON (UTF-8) |
+| Authentication | `X-API-Key` header |
+| Stable prefix | `/v1/...` (unprefixed paths still work) |
+| Response formats | JSON by default; negotiate `csv` / `tsv` / `xml` / `yaml` via `?format=` |
+
+Interactive docs: [API Explorer](https://api.sunnymeteo.com/docs)
+
+---
+
+## Quickstart
+
+### Prerequisites
+
+- SunnyMeteo API key (`X-API-Key`)
+- Network access to `https://api.sunnymeteo.com`
+- Any HTTP client (curl, Postman, or a future SDK)
+
+### First request
+
+<Steps>
+  <Step title="Obtain an API key">
+    Request a trial or production key via [Contact us](https://www.sunnymeteo.com/en/about/), or create one in the console (coming soon).
+  </Step>
+  <Step title="Call current conditions">
+    Use a city name, city code, or coordinates:
+
+    ```bash
+    curl -s "https://api.sunnymeteo.com/v1/weather/condition?city_name=Beijing" \
+      -H "X-API-Key: YOUR_API_KEY"
+    ```
+  </Step>
+  <Step title="Browse product docs">
+    Use the **Weather / Air quality / Station / Disaster API** groups in the sidebar for fields and examples.
+  </Step>
+</Steps>
+
+<Tip>
+  Prefer the [API Explorer](https://api.sunnymeteo.com/docs) when validating live paths and parameters.
+</Tip>
+
+---
+
+## Authentication & rate limits
+
+### Request headers
+
+```http
+GET /v1/weather/condition?city_name=Beijing HTTP/1.1
+Host: api.sunnymeteo.com
+X-API-Key: your_api_key_here
+Accept: application/json
+```
+
+### Module grants
+
+Access is granted **per module**. Unauthorized modules return `403`. Common modules:
+
+| Module code | Endpoints |
+|-------------|-----------|
+| `condition` | `/weather/condition` |
+| `24hourly` / `360hourly` | Hourly forecasts |
+| `15daily` / `life_index` | 15-day / life index |
+| `aqi` / `aqi_hourly` | Air quality |
+| `power_*` | Station APIs |
+| `earthquake_*` / `typhoon_*` | Disaster APIs |
+| `global_alerts` / `meteo_alerts` / `all_alerts` | Alerts |
+
+### Rate limits
+
+- Gateway: ~10 req/s per IP (burst 20)
+- Application: optional per-user / per-module quotas
+
+Exceeding limits returns HTTP `429`.
+
+### Get a key
+
+Contact us via [the about page](https://www.sunnymeteo.com/en/about/) or [sunnylab2026@yeah.net](mailto:sunnylab2026@yeah.net).
+
+---
+
+## Status codes & errors
+
+### HTTP status codes
+
+| Code | Meaning | Description |
+|------|---------|-------------|
+| `200` | OK | Success |
+| `201` | Created | Resource created (e.g. new station) |
+| `400` | Bad Request | Request could not be parsed |
+| `401` | Unauthorized | API key missing, invalid, or expired |
+| `403` | Forbidden | No grant for the required module |
+| `404` | Not Found | City / station / data not found |
+| `422` | Unprocessable Entity | Invalid parameters (e.g. unpaired lat/lon) |
+| `429` | Too Many Requests | Rate limit exceeded |
+| `500` | Internal Server Error | Server error |
+| `501` | Not Implemented | Feature not available yet |
+
+### Error response examples
+
+```json
+{
+  "detail": "Provide one of city_uid, city_code, city_name, or lat+lon"
+}
+```
+
+```json
+{
+  "detail": "Invalid API key"
+}
+```
+
+On validation failures, `detail` may be a string or a structured payload — treat the live response as authoritative.
+
+---
+
+## MCP / SDK (coming soon)
+
+<Note>
+  MCP and language SDKs (install, auth, examples) will be added as later sections on this page so they share the same auth and error conventions as the REST API.
+</Note>
